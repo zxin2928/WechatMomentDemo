@@ -1,0 +1,62 @@
+//
+//  WMModelClass.m
+//  WechatMomentDemo
+//
+//  Created by zhaoxin on 2018/4/17.
+//  Copyright © 2018年 zhaoxin. All rights reserved.
+//
+
+#import "WMCommon.h"
+#import "WMModelClass.h"
+#import "WMMomentModel.h"
+
+@implementation WMModelClass
+
++ (NSMutableArray*)momentListWithData:(NSArray*)data{
+    @try
+    {
+        NSMutableArray *dataAry = [NSMutableArray array];
+        for (int i = 0; i<data.count; i++) {
+            NSDictionary* itemDic = [data objectAtIndexSafe:i];
+            WMMomentModel *momentModel = [WMMomentModel modelWithJSON:itemDic];
+            momentModel.avatar = momentModel.sender.avatar;
+            momentModel.username = momentModel.sender.username;
+            momentModel.nick = momentModel.sender.nick;
+            
+            //图片数据
+            NSMutableArray *imageArray = [NSMutableArray array];
+            for (int j = 0; j < momentModel.images.count; j++) {
+                WMImageModel *imageModel = [WMImageModel modelWithJSON:[momentModel.images objectAtIndexSafe:j]];
+                [imageArray addObjectSafe:imageModel];
+            }
+            momentModel.images = imageArray;
+
+            //评论列表
+            NSMutableArray *commentArray = [NSMutableArray array];
+            for (int k = 0; k < momentModel.comments.count; k++) {
+                WMCommentModel *commentModel = [WMCommentModel modelWithJSON:[momentModel.comments objectAtIndexSafe:k]];
+                commentModel.avatar = commentModel.sender.avatar;
+                commentModel.username = commentModel.sender.username;
+                commentModel.nick = commentModel.sender.nick;
+                
+                [commentArray addObjectSafe:commentModel];
+            }
+            momentModel.comments = commentArray;
+            
+            [momentModel caculateCellHeight];
+            
+            if (momentModel.content || momentModel.images.count > 0) {
+                [dataAry addObject:momentModel];
+            }
+            
+        }
+        return dataAry != nil ? dataAry : [NSMutableArray array];
+        
+    }
+    @catch (NSException *exception)
+    {
+        return [NSMutableArray array];
+    }
+}
+
+@end

@@ -1,0 +1,23 @@
+//
+//  WMMomentImageContainerView.h
+//  WechatMomentDemo
+//
+//  Created by zhaoxin on 2018/4/17.
+//  Copyright © 2018年 zhaoxin. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface WMMomentImageContainerView : UIView
+
+@property (strong, nonatomic) NSArray *imageUrls;
+
+@property (strong, nonatomic) NSMutableArray *imageViews;
+
+@property (assign, nonatomic) CGFloat imageWidth;
+
+@property (assign, nonatomic) CGFloat imageHeight;
+
+@property (copy ,nonatomic) void (^imageBlock)(NSArray *imageViews, NSInteger index);
+
+@end

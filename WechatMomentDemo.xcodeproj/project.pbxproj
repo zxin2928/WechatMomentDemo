@@ -1,0 +1,972 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A3946D77944C09C425B23BEC /* libPods-WechatMomentDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C115D71CA15638612364A81 /* libPods-WechatMomentDemo.a */; };
+		DCB676092084B0D900000120 /* WMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676082084B0D900000120 /* WMAppDelegate.m */; };
+		DCB676112084B0DB00000120 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCB676102084B0DB00000120 /* Assets.xcassets */; };
+		DCB676172084B0DB00000120 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676162084B0DB00000120 /* main.m */; };
+		DCB676212084B0DB00000120 /* WechatMomentDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676202084B0DB00000120 /* WechatMomentDemoTests.m */; };
+		DCB6762C2084B0DB00000120 /* WechatMomentDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6762B2084B0DB00000120 /* WechatMomentDemoUITests.m */; };
+		DCB676422084B2A200000120 /* WMBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676412084B2A200000120 /* WMBaseViewController.m */; };
+		DCB676452084B31600000120 /* WMMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676442084B31600000120 /* WMMomentViewController.m */; };
+		DCB676482084D3CA00000120 /* WMTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676472084D3CA00000120 /* WMTabBarViewController.m */; };
+		DCB6764B2084D46000000120 /* WMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6764A2084D46000000120 /* WMNavigationController.m */; };
+		DCB676572084D5A000000120 /* NSMutableDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6764F2084D59F00000120 /* NSMutableDictionary+Safe.m */; };
+		DCB676582084D5A000000120 /* NSMutableArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676512084D5A000000120 /* NSMutableArray+Safe.m */; };
+		DCB676592084D5A000000120 /* NSString+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676542084D5A000000120 /* NSString+Category.m */; };
+		DCB6765A2084D5A000000120 /* UIScrollView+Gesture.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676562084D5A000000120 /* UIScrollView+Gesture.m */; };
+		DCB6765D2084D61400000120 /* UINavigationController+FullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6765B2084D61400000120 /* UINavigationController+FullscreenPopGesture.m */; };
+		DCB676612084DA0300000120 /* WMDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676602084DA0300000120 /* WMDiscoverViewController.m */; };
+		DCB676652084DCA800000120 /* UIBarButtonItem+item.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676642084DCA800000120 /* UIBarButtonItem+item.m */; };
+		DCB6766E2084E01100000120 /* WMDiscoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6766D2084E01100000120 /* WMDiscoverCell.m */; };
+		DCB676712084E09600000120 /* WMDicoverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676702084E09600000120 /* WMDicoverModel.m */; };
+		DCB676742084E54100000120 /* WMRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676732084E54100000120 /* WMRequest.m */; };
+		DCB676782084F51400000120 /* WMRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676772084F51400000120 /* WMRequestManager.m */; };
+		DCB6767B2084FA9200000120 /* WMMomentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6767A2084FA9200000120 /* WMMomentModel.m */; };
+		DCB6768B2085CB8500000120 /* WMModelClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6768A2085CB8500000120 /* WMModelClass.m */; };
+		DCB676952085FBB000000120 /* WMCommentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676942085FBB000000120 /* WMCommentTableView.m */; };
+		DCB67698208629CE00000120 /* WMBaseRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB67697208629CE00000120 /* WMBaseRefreshView.m */; };
+		DCB6769B20862A6B00000120 /* WMMomentRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6769A20862A6B00000120 /* WMMomentRefreshView.m */; };
+		DCB6769E20862B4000000120 /* WMMomentHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6769D20862B4000000120 /* WMMomentHeadView.m */; };
+		DCB676A120862C4900000120 /* UIView+gesture.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6769F20862C4900000120 /* UIView+gesture.m */; };
+		DCB676A820874A0A00000120 /* WMSql.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676A720874A0A00000120 /* WMSql.m */; };
+		DCB676B420878B7A00000120 /* WMCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676B320878B7A00000120 /* WMCommentTableViewCell.m */; };
+		DCB676B920878B8900000120 /* WMMomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676B620878B8900000120 /* WMMomentCell.m */; };
+		DCB676BA20878B8900000120 /* WMMomentImageContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676B820878B8900000120 /* WMMomentImageContainerView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DCB6761D2084B0DB00000120 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCB675FC2084B0D900000120 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCB676032084B0D900000120;
+			remoteInfo = WechatMomentDemo;
+		};
+		DCB676282084B0DB00000120 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCB675FC2084B0D900000120 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCB676032084B0D900000120;
+			remoteInfo = WechatMomentDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		66E4AD3F04F42B7919EC740A /* Pods-WechatMomentDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WechatMomentDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WechatMomentDemo/Pods-WechatMomentDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		720833CAFF81A2727147F1FC /* Pods-WechatMomentDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WechatMomentDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-WechatMomentDemo/Pods-WechatMomentDemo.release.xcconfig"; sourceTree = "<group>"; };
+		8C115D71CA15638612364A81 /* libPods-WechatMomentDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WechatMomentDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCB676042084B0D900000120 /* WechatMomentDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WechatMomentDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCB676072084B0D900000120 /* WMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMAppDelegate.h; sourceTree = "<group>"; };
+		DCB676082084B0D900000120 /* WMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMAppDelegate.m; sourceTree = "<group>"; };
+		DCB676102084B0DB00000120 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DCB676152084B0DB00000120 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCB676162084B0DB00000120 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DCB6761C2084B0DB00000120 /* WechatMomentDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WechatMomentDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCB676202084B0DB00000120 /* WechatMomentDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WechatMomentDemoTests.m; sourceTree = "<group>"; };
+		DCB676222084B0DB00000120 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCB676272084B0DB00000120 /* WechatMomentDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WechatMomentDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCB6762B2084B0DB00000120 /* WechatMomentDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WechatMomentDemoUITests.m; sourceTree = "<group>"; };
+		DCB6762D2084B0DB00000120 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCB676402084B2A200000120 /* WMBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMBaseViewController.h; sourceTree = "<group>"; };
+		DCB676412084B2A200000120 /* WMBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMBaseViewController.m; sourceTree = "<group>"; };
+		DCB676432084B31600000120 /* WMMomentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMMomentViewController.h; sourceTree = "<group>"; };
+		DCB676442084B31600000120 /* WMMomentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMMomentViewController.m; sourceTree = "<group>"; };
+		DCB676462084D3CA00000120 /* WMTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMTabBarViewController.h; sourceTree = "<group>"; };
+		DCB676472084D3CA00000120 /* WMTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMTabBarViewController.m; sourceTree = "<group>"; };
+		DCB676492084D46000000120 /* WMNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMNavigationController.h; sourceTree = "<group>"; };
+		DCB6764A2084D46000000120 /* WMNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMNavigationController.m; sourceTree = "<group>"; };
+		DCB6764D2084D4D400000120 /* WMCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMCommon.h; sourceTree = "<group>"; };
+		DCB6764F2084D59F00000120 /* NSMutableDictionary+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+Safe.m"; sourceTree = "<group>"; };
+		DCB676502084D59F00000120 /* UIScrollView+Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Gesture.h"; sourceTree = "<group>"; };
+		DCB676512084D5A000000120 /* NSMutableArray+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Safe.m"; sourceTree = "<group>"; };
+		DCB676522084D5A000000120 /* NSMutableDictionary+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+Safe.h"; sourceTree = "<group>"; };
+		DCB676532084D5A000000120 /* NSString+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Category.h"; sourceTree = "<group>"; };
+		DCB676542084D5A000000120 /* NSString+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Category.m"; sourceTree = "<group>"; };
+		DCB676552084D5A000000120 /* NSMutableArray+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Safe.h"; sourceTree = "<group>"; };
+		DCB676562084D5A000000120 /* UIScrollView+Gesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Gesture.m"; sourceTree = "<group>"; };
+		DCB6765B2084D61400000120 /* UINavigationController+FullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FullscreenPopGesture.m"; sourceTree = "<group>"; };
+		DCB6765C2084D61400000120 /* UINavigationController+FullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FullscreenPopGesture.h"; sourceTree = "<group>"; };
+		DCB6765F2084DA0300000120 /* WMDiscoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMDiscoverViewController.h; sourceTree = "<group>"; };
+		DCB676602084DA0300000120 /* WMDiscoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMDiscoverViewController.m; sourceTree = "<group>"; };
+		DCB676632084DCA800000120 /* UIBarButtonItem+item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+item.h"; sourceTree = "<group>"; };
+		DCB676642084DCA800000120 /* UIBarButtonItem+item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+item.m"; sourceTree = "<group>"; };
+		DCB6766C2084E01100000120 /* WMDiscoverCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMDiscoverCell.h; sourceTree = "<group>"; };
+		DCB6766D2084E01100000120 /* WMDiscoverCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMDiscoverCell.m; sourceTree = "<group>"; };
+		DCB6766F2084E09600000120 /* WMDicoverModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMDicoverModel.h; sourceTree = "<group>"; };
+		DCB676702084E09600000120 /* WMDicoverModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMDicoverModel.m; sourceTree = "<group>"; };
+		DCB676722084E54100000120 /* WMRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMRequest.h; sourceTree = "<group>"; };
+		DCB676732084E54100000120 /* WMRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMRequest.m; sourceTree = "<group>"; };
+		DCB676752084E56900000120 /* WMRequestCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMRequestCommon.h; sourceTree = "<group>"; };
+		DCB676762084F51400000120 /* WMRequestManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMRequestManager.h; sourceTree = "<group>"; };
+		DCB676772084F51400000120 /* WMRequestManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMRequestManager.m; sourceTree = "<group>"; };
+		DCB676792084FA9200000120 /* WMMomentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMMomentModel.h; sourceTree = "<group>"; };
+		DCB6767A2084FA9200000120 /* WMMomentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMMomentModel.m; sourceTree = "<group>"; };
+		DCB676892085CB8500000120 /* WMModelClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMModelClass.h; sourceTree = "<group>"; };
+		DCB6768A2085CB8500000120 /* WMModelClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMModelClass.m; sourceTree = "<group>"; };
+		DCB676932085FBB000000120 /* WMCommentTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMCommentTableView.h; sourceTree = "<group>"; };
+		DCB676942085FBB000000120 /* WMCommentTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMCommentTableView.m; sourceTree = "<group>"; };
+		DCB67696208629CE00000120 /* WMBaseRefreshView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMBaseRefreshView.h; sourceTree = "<group>"; };
+		DCB67697208629CE00000120 /* WMBaseRefreshView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMBaseRefreshView.m; sourceTree = "<group>"; };
+		DCB6769920862A6B00000120 /* WMMomentRefreshView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMMomentRefreshView.h; sourceTree = "<group>"; };
+		DCB6769A20862A6B00000120 /* WMMomentRefreshView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMMomentRefreshView.m; sourceTree = "<group>"; };
+		DCB6769C20862B4000000120 /* WMMomentHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMMomentHeadView.h; sourceTree = "<group>"; };
+		DCB6769D20862B4000000120 /* WMMomentHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMMomentHeadView.m; sourceTree = "<group>"; };
+		DCB6769F20862C4900000120 /* UIView+gesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+gesture.m"; sourceTree = "<group>"; };
+		DCB676A020862C4900000120 /* UIView+gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+gesture.h"; sourceTree = "<group>"; };
+		DCB676A620874A0A00000120 /* WMSql.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMSql.h; sourceTree = "<group>"; };
+		DCB676A720874A0A00000120 /* WMSql.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMSql.m; sourceTree = "<group>"; };
+		DCB676B220878B7A00000120 /* WMCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMCommentTableViewCell.h; sourceTree = "<group>"; };
+		DCB676B320878B7A00000120 /* WMCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMCommentTableViewCell.m; sourceTree = "<group>"; };
+		DCB676B520878B8900000120 /* WMMomentImageContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMMomentImageContainerView.h; sourceTree = "<group>"; };
+		DCB676B620878B8900000120 /* WMMomentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMMomentCell.m; sourceTree = "<group>"; };
+		DCB676B720878B8900000120 /* WMMomentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMMomentCell.h; sourceTree = "<group>"; };
+		DCB676B820878B8900000120 /* WMMomentImageContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMMomentImageContainerView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DCB676012084B0D900000120 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3946D77944C09C425B23BEC /* libPods-WechatMomentDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCB676192084B0DB00000120 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCB676242084B0DB00000120 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B3E4EB884FDFD43CA470EB0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C115D71CA15638612364A81 /* libPods-WechatMomentDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B842AF7F9851F12CC354A091 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				66E4AD3F04F42B7919EC740A /* Pods-WechatMomentDemo.debug.xcconfig */,
+				720833CAFF81A2727147F1FC /* Pods-WechatMomentDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DCB675FB2084B0D900000120 = {
+			isa = PBXGroup;
+			children = (
+				DCB676062084B0D900000120 /* WechatMomentDemo */,
+				DCB6761F2084B0DB00000120 /* WechatMomentDemoTests */,
+				DCB6762A2084B0DB00000120 /* WechatMomentDemoUITests */,
+				DCB676052084B0D900000120 /* Products */,
+				B842AF7F9851F12CC354A091 /* Pods */,
+				B3E4EB884FDFD43CA470EB0D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DCB676052084B0D900000120 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676042084B0D900000120 /* WechatMomentDemo.app */,
+				DCB6761C2084B0DB00000120 /* WechatMomentDemoTests.xctest */,
+				DCB676272084B0DB00000120 /* WechatMomentDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCB676062084B0D900000120 /* WechatMomentDemo */ = {
+			isa = PBXGroup;
+			children = (
+				DCB6763F2084B21400000120 /* AppDelegate */,
+				DCB6763C2084B21300000120 /* Main */,
+				DCB676392084B21300000120 /* Tool */,
+				DCB6764C2084D4B000000120 /* Common */,
+				DCB6763B2084B21300000120 /* Supporting files */,
+			);
+			path = WechatMomentDemo;
+			sourceTree = "<group>";
+		};
+		DCB6761F2084B0DB00000120 /* WechatMomentDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676202084B0DB00000120 /* WechatMomentDemoTests.m */,
+				DCB676222084B0DB00000120 /* Info.plist */,
+			);
+			path = WechatMomentDemoTests;
+			sourceTree = "<group>";
+		};
+		DCB6762A2084B0DB00000120 /* WechatMomentDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DCB6762B2084B0DB00000120 /* WechatMomentDemoUITests.m */,
+				DCB6762D2084B0DB00000120 /* Info.plist */,
+			);
+			path = WechatMomentDemoUITests;
+			sourceTree = "<group>";
+		};
+		DCB676392084B21300000120 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				DCB6763A2084B21300000120 /* Request */,
+				DCB676882085CB6A00000120 /* ModelClass */,
+				DCB67685208582BA00000120 /* Cache */,
+				DCB676622084DCA800000120 /* UIBarButtonItem+item */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		DCB6763A2084B21300000120 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676722084E54100000120 /* WMRequest.h */,
+				DCB676732084E54100000120 /* WMRequest.m */,
+				DCB676752084E56900000120 /* WMRequestCommon.h */,
+				DCB676762084F51400000120 /* WMRequestManager.h */,
+				DCB676772084F51400000120 /* WMRequestManager.m */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		DCB6763B2084B21300000120 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676102084B0DB00000120 /* Assets.xcassets */,
+				DCB676152084B0DB00000120 /* Info.plist */,
+				DCB676162084B0DB00000120 /* main.m */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		DCB6763C2084B21300000120 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DCB6763E2084B21300000120 /* Base */,
+				DCB6765E2084D9CA00000120 /* Discover */,
+				DCB6763D2084B21300000120 /* WechatMoment */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		DCB6763D2084B21300000120 /* WechatMoment */ = {
+			isa = PBXGroup;
+			children = (
+				DCB6766A2084DFEA00000120 /* Controller */,
+				DCB676692084DFEA00000120 /* Model */,
+				DCB6766B2084DFEA00000120 /* View */,
+				DCB6768C2085D18400000120 /* Refresh */,
+			);
+			path = WechatMoment;
+			sourceTree = "<group>";
+		};
+		DCB6763E2084B21300000120 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676402084B2A200000120 /* WMBaseViewController.h */,
+				DCB676412084B2A200000120 /* WMBaseViewController.m */,
+				DCB676462084D3CA00000120 /* WMTabBarViewController.h */,
+				DCB676472084D3CA00000120 /* WMTabBarViewController.m */,
+				DCB676492084D46000000120 /* WMNavigationController.h */,
+				DCB6764A2084D46000000120 /* WMNavigationController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		DCB6763F2084B21400000120 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676072084B0D900000120 /* WMAppDelegate.h */,
+				DCB676082084B0D900000120 /* WMAppDelegate.m */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		DCB6764C2084D4B000000120 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DCB6764D2084D4D400000120 /* WMCommon.h */,
+				DCB6764E2084D58600000120 /* Extension */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		DCB6764E2084D58600000120 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676A020862C4900000120 /* UIView+gesture.h */,
+				DCB6769F20862C4900000120 /* UIView+gesture.m */,
+				DCB6765C2084D61400000120 /* UINavigationController+FullscreenPopGesture.h */,
+				DCB6765B2084D61400000120 /* UINavigationController+FullscreenPopGesture.m */,
+				DCB676552084D5A000000120 /* NSMutableArray+Safe.h */,
+				DCB676512084D5A000000120 /* NSMutableArray+Safe.m */,
+				DCB676522084D5A000000120 /* NSMutableDictionary+Safe.h */,
+				DCB6764F2084D59F00000120 /* NSMutableDictionary+Safe.m */,
+				DCB676532084D5A000000120 /* NSString+Category.h */,
+				DCB676542084D5A000000120 /* NSString+Category.m */,
+				DCB676502084D59F00000120 /* UIScrollView+Gesture.h */,
+				DCB676562084D5A000000120 /* UIScrollView+Gesture.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		DCB6765E2084D9CA00000120 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676672084DFDE00000120 /* Controller */,
+				DCB676682084DFDE00000120 /* Model */,
+				DCB676662084DFDE00000120 /* View */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		DCB676622084DCA800000120 /* UIBarButtonItem+item */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676632084DCA800000120 /* UIBarButtonItem+item.h */,
+				DCB676642084DCA800000120 /* UIBarButtonItem+item.m */,
+			);
+			path = "UIBarButtonItem+item";
+			sourceTree = "<group>";
+		};
+		DCB676662084DFDE00000120 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DCB6766C2084E01100000120 /* WMDiscoverCell.h */,
+				DCB6766D2084E01100000120 /* WMDiscoverCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DCB676672084DFDE00000120 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DCB6765F2084DA0300000120 /* WMDiscoverViewController.h */,
+				DCB676602084DA0300000120 /* WMDiscoverViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DCB676682084DFDE00000120 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DCB6766F2084E09600000120 /* WMDicoverModel.h */,
+				DCB676702084E09600000120 /* WMDicoverModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DCB676692084DFEA00000120 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676792084FA9200000120 /* WMMomentModel.h */,
+				DCB6767A2084FA9200000120 /* WMMomentModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DCB6766A2084DFEA00000120 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676432084B31600000120 /* WMMomentViewController.h */,
+				DCB676442084B31600000120 /* WMMomentViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DCB6766B2084DFEA00000120 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676B720878B8900000120 /* WMMomentCell.h */,
+				DCB676B620878B8900000120 /* WMMomentCell.m */,
+				DCB676B520878B8900000120 /* WMMomentImageContainerView.h */,
+				DCB676B820878B8900000120 /* WMMomentImageContainerView.m */,
+				DCB676A220863A1300000120 /* CommentView */,
+				DCB6769C20862B4000000120 /* WMMomentHeadView.h */,
+				DCB6769D20862B4000000120 /* WMMomentHeadView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DCB67685208582BA00000120 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				DCB67686208582BA00000120 /* Image */,
+				DCB67687208582BA00000120 /* Sql */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		DCB67686208582BA00000120 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		DCB67687208582BA00000120 /* Sql */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676A620874A0A00000120 /* WMSql.h */,
+				DCB676A720874A0A00000120 /* WMSql.m */,
+			);
+			path = Sql;
+			sourceTree = "<group>";
+		};
+		DCB676882085CB6A00000120 /* ModelClass */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676892085CB8500000120 /* WMModelClass.h */,
+				DCB6768A2085CB8500000120 /* WMModelClass.m */,
+			);
+			path = ModelClass;
+			sourceTree = "<group>";
+		};
+		DCB6768C2085D18400000120 /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				DCB67696208629CE00000120 /* WMBaseRefreshView.h */,
+				DCB67697208629CE00000120 /* WMBaseRefreshView.m */,
+				DCB6769920862A6B00000120 /* WMMomentRefreshView.h */,
+				DCB6769A20862A6B00000120 /* WMMomentRefreshView.m */,
+			);
+			path = Refresh;
+			sourceTree = "<group>";
+		};
+		DCB676A220863A1300000120 /* CommentView */ = {
+			isa = PBXGroup;
+			children = (
+				DCB676B220878B7A00000120 /* WMCommentTableViewCell.h */,
+				DCB676B320878B7A00000120 /* WMCommentTableViewCell.m */,
+				DCB676932085FBB000000120 /* WMCommentTableView.h */,
+				DCB676942085FBB000000120 /* WMCommentTableView.m */,
+			);
+			path = CommentView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DCB676032084B0D900000120 /* WechatMomentDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCB676302084B0DB00000120 /* Build configuration list for PBXNativeTarget "WechatMomentDemo" */;
+			buildPhases = (
+				FFAAE7B4E0E7CEAE81D63084 /* [CP] Check Pods Manifest.lock */,
+				DCB676002084B0D900000120 /* Sources */,
+				DCB676012084B0D900000120 /* Frameworks */,
+				DCB676022084B0D900000120 /* Resources */,
+				5352F918183BAAB90BA3E8FE /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WechatMomentDemo;
+			productName = WechatMomentDemo;
+			productReference = DCB676042084B0D900000120 /* WechatMomentDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DCB6761B2084B0DB00000120 /* WechatMomentDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCB676332084B0DB00000120 /* Build configuration list for PBXNativeTarget "WechatMomentDemoTests" */;
+			buildPhases = (
+				DCB676182084B0DB00000120 /* Sources */,
+				DCB676192084B0DB00000120 /* Frameworks */,
+				DCB6761A2084B0DB00000120 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCB6761E2084B0DB00000120 /* PBXTargetDependency */,
+			);
+			name = WechatMomentDemoTests;
+			productName = WechatMomentDemoTests;
+			productReference = DCB6761C2084B0DB00000120 /* WechatMomentDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DCB676262084B0DB00000120 /* WechatMomentDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCB676362084B0DB00000120 /* Build configuration list for PBXNativeTarget "WechatMomentDemoUITests" */;
+			buildPhases = (
+				DCB676232084B0DB00000120 /* Sources */,
+				DCB676242084B0DB00000120 /* Frameworks */,
+				DCB676252084B0DB00000120 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCB676292084B0DB00000120 /* PBXTargetDependency */,
+			);
+			name = WechatMomentDemoUITests;
+			productName = WechatMomentDemoUITests;
+			productReference = DCB676272084B0DB00000120 /* WechatMomentDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DCB675FC2084B0D900000120 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = zhaoxin;
+				TargetAttributes = {
+					DCB676032084B0D900000120 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+					DCB6761B2084B0DB00000120 = {
+						CreatedOnToolsVersion = 9.3;
+						TestTargetID = DCB676032084B0D900000120;
+					};
+					DCB676262084B0DB00000120 = {
+						CreatedOnToolsVersion = 9.3;
+						TestTargetID = DCB676032084B0D900000120;
+					};
+				};
+			};
+			buildConfigurationList = DCB675FF2084B0D900000120 /* Build configuration list for PBXProject "WechatMomentDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DCB675FB2084B0D900000120;
+			productRefGroup = DCB676052084B0D900000120 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DCB676032084B0D900000120 /* WechatMomentDemo */,
+				DCB6761B2084B0DB00000120 /* WechatMomentDemoTests */,
+				DCB676262084B0DB00000120 /* WechatMomentDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DCB676022084B0D900000120 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCB676112084B0DB00000120 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCB6761A2084B0DB00000120 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCB676252084B0DB00000120 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5352F918183BAAB90BA3E8FE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WechatMomentDemo/Pods-WechatMomentDemo-resources.sh",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.plist",
+				"${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_ExpressionImage.plist",
+				"${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle",
+				"${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle/gifexpression.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MLEmoji_Expression.plist",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MLEmoji_ExpressionImage.plist",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MLEmoji_Expression.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gifexpression.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WechatMomentDemo/Pods-WechatMomentDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFAAE7B4E0E7CEAE81D63084 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WechatMomentDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DCB676002084B0D900000120 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCB6766E2084E01100000120 /* WMDiscoverCell.m in Sources */,
+				DCB676652084DCA800000120 /* UIBarButtonItem+item.m in Sources */,
+				DCB6765D2084D61400000120 /* UINavigationController+FullscreenPopGesture.m in Sources */,
+				DCB676742084E54100000120 /* WMRequest.m in Sources */,
+				DCB676BA20878B8900000120 /* WMMomentImageContainerView.m in Sources */,
+				DCB676422084B2A200000120 /* WMBaseViewController.m in Sources */,
+				DCB676B420878B7A00000120 /* WMCommentTableViewCell.m in Sources */,
+				DCB6764B2084D46000000120 /* WMNavigationController.m in Sources */,
+				DCB6769E20862B4000000120 /* WMMomentHeadView.m in Sources */,
+				DCB6769B20862A6B00000120 /* WMMomentRefreshView.m in Sources */,
+				DCB676612084DA0300000120 /* WMDiscoverViewController.m in Sources */,
+				DCB676B920878B8900000120 /* WMMomentCell.m in Sources */,
+				DCB676A820874A0A00000120 /* WMSql.m in Sources */,
+				DCB676172084B0DB00000120 /* main.m in Sources */,
+				DCB6765A2084D5A000000120 /* UIScrollView+Gesture.m in Sources */,
+				DCB676572084D5A000000120 /* NSMutableDictionary+Safe.m in Sources */,
+				DCB67698208629CE00000120 /* WMBaseRefreshView.m in Sources */,
+				DCB676592084D5A000000120 /* NSString+Category.m in Sources */,
+				DCB676952085FBB000000120 /* WMCommentTableView.m in Sources */,
+				DCB676582084D5A000000120 /* NSMutableArray+Safe.m in Sources */,
+				DCB676452084B31600000120 /* WMMomentViewController.m in Sources */,
+				DCB676782084F51400000120 /* WMRequestManager.m in Sources */,
+				DCB676712084E09600000120 /* WMDicoverModel.m in Sources */,
+				DCB676482084D3CA00000120 /* WMTabBarViewController.m in Sources */,
+				DCB676A120862C4900000120 /* UIView+gesture.m in Sources */,
+				DCB6768B2085CB8500000120 /* WMModelClass.m in Sources */,
+				DCB676092084B0D900000120 /* WMAppDelegate.m in Sources */,
+				DCB6767B2084FA9200000120 /* WMMomentModel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCB676182084B0DB00000120 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCB676212084B0DB00000120 /* WechatMomentDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCB676232084B0DB00000120 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCB6762C2084B0DB00000120 /* WechatMomentDemoUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DCB6761E2084B0DB00000120 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCB676032084B0D900000120 /* WechatMomentDemo */;
+			targetProxy = DCB6761D2084B0DB00000120 /* PBXContainerItemProxy */;
+		};
+		DCB676292084B0DB00000120 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCB676032084B0D900000120 /* WechatMomentDemo */;
+			targetProxy = DCB676282084B0DB00000120 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		DCB6762E2084B0DB00000120 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DCB6762F2084B0DB00000120 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DCB676312084B0DB00000120 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66E4AD3F04F42B7919EC740A /* Pods-WechatMomentDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3X7Q2W5F8J;
+				INFOPLIST_FILE = "$(SRCROOT)/WechatMomentDemo/Supporting files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zhaoxin.WechatMomentDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DCB676322084B0DB00000120 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 720833CAFF81A2727147F1FC /* Pods-WechatMomentDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3X7Q2W5F8J;
+				INFOPLIST_FILE = "$(SRCROOT)/WechatMomentDemo/Supporting files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zhaoxin.WechatMomentDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DCB676342084B0DB00000120 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3X7Q2W5F8J;
+				INFOPLIST_FILE = WechatMomentDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = WechatMomentDemo.zhaoxin.WechatMomentDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WechatMomentDemo.app/WechatMomentDemo";
+			};
+			name = Debug;
+		};
+		DCB676352084B0DB00000120 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3X7Q2W5F8J;
+				INFOPLIST_FILE = WechatMomentDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = WechatMomentDemo.zhaoxin.WechatMomentDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WechatMomentDemo.app/WechatMomentDemo";
+			};
+			name = Release;
+		};
+		DCB676372084B0DB00000120 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3X7Q2W5F8J;
+				INFOPLIST_FILE = WechatMomentDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = WechatMomentDemo.zhaoxin.WechatMomentDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WechatMomentDemo;
+			};
+			name = Debug;
+		};
+		DCB676382084B0DB00000120 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3X7Q2W5F8J;
+				INFOPLIST_FILE = WechatMomentDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = WechatMomentDemo.zhaoxin.WechatMomentDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WechatMomentDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DCB675FF2084B0D900000120 /* Build configuration list for PBXProject "WechatMomentDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCB6762E2084B0DB00000120 /* Debug */,
+				DCB6762F2084B0DB00000120 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCB676302084B0DB00000120 /* Build configuration list for PBXNativeTarget "WechatMomentDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCB676312084B0DB00000120 /* Debug */,
+				DCB676322084B0DB00000120 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCB676332084B0DB00000120 /* Build configuration list for PBXNativeTarget "WechatMomentDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCB676342084B0DB00000120 /* Debug */,
+				DCB676352084B0DB00000120 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCB676362084B0DB00000120 /* Build configuration list for PBXNativeTarget "WechatMomentDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCB676372084B0DB00000120 /* Debug */,
+				DCB676382084B0DB00000120 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DCB675FC2084B0D900000120 /* Project object */;
+}
