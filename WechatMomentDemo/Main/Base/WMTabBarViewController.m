@@ -60,6 +60,8 @@
     
     [self.tabBar setBackgroundImage:[[UIImage alloc]init]];
     
+    [[WMSql shared]createTables];
+    
 }
 
 

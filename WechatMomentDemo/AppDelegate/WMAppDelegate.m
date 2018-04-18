@@ -8,6 +8,7 @@
 
 #import "WMAppDelegate.h"
 #import "WMTabBarViewController.h"
+#import "WMCommon.h"
 
 @interface WMAppDelegate ()
 
@@ -21,6 +22,7 @@
     [self configWindow];
     
     [self goMainTab];
+    
     return YES;
 }
 

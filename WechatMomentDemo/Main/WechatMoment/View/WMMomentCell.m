@@ -64,7 +64,7 @@
         
         _contentLab = [MLEmojiLabel new];
         _contentLab.textColor = HEX_RGB(black);
-        _contentLab.numberOfLines = 6;
+        _contentLab.numberOfLines = 0;
         _contentLab.textAlignment = NSTextAlignmentJustified;
         _contentLab.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
         _contentLab.font = [UIFont systemFontOfSize:14];
@@ -128,13 +128,6 @@
     _imageContainerView.imageUrls = _model.images;
     _imageContainerView.imageBlock = _imageBlock;
     
-    if (_model.isOpening) {
-        _contentLab.numberOfLines = 0;
-        [_moreButton setTitle:@"收起" forState:UIControlStateNormal];
-    }else{
-        _contentLab.numberOfLines = 6;
-        [_moreButton setTitle:@"全文" forState:UIControlStateNormal];
-    }
     
     [_contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.nicknameButton);
@@ -142,23 +135,13 @@
         make.top.equalTo(self.nicknameButton.mas_bottom).offset(8);
     }];
     
-    if (_model.isShowMoreButton) {
-        [_moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self.avatarImageView.mas_trailing).offset(10);
-            make.width.mas_lessThanOrEqualTo(kScreenWidth - 15 - 40);
-            make.top.equalTo(self.contentLab.mas_bottom);
-            make.height.mas_equalTo(20);
-        }];
-
-    }else{
-        [_moreButton setTitle:@"" forState:UIControlStateNormal];
-        [_moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self.avatarImageView.mas_trailing).offset(10);
-            make.width.mas_lessThanOrEqualTo(kScreenWidth - 15 - 40);
-            make.top.equalTo(self.contentLab.mas_bottom);
-            make.height.mas_equalTo(1);
-        }];
-    }
+    [_moreButton setTitle:@"" forState:UIControlStateNormal];
+    [_moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.avatarImageView.mas_trailing).offset(10);
+        make.width.mas_lessThanOrEqualTo(kScreenWidth - 15 - 40);
+        make.top.equalTo(self.contentLab.mas_bottom);
+        make.height.mas_equalTo(1);
+    }];
     
     [_imageContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.nicknameButton);
@@ -169,7 +152,7 @@
 
     
     [_commentTable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.imageContainerView.mas_bottom);
+        make.top.equalTo(self.imageContainerView.mas_bottom).offset(-5);
         make.leading.equalTo(self.nicknameButton);
         make.trailing.equalTo(self).offset(-10);
         make.height.mas_equalTo(self.model.commentHeight);
@@ -179,17 +162,7 @@
 }
 
 - (void)clickMoreButton:(UIButton*)button{
-    if (_model.isOpening) {
-        [_moreButton setTitle:@"全文" forState:UIControlStateNormal];
-    }else{
-        [_moreButton setTitle:@"收起" forState:UIControlStateNormal];
-    }
-    
-    if (self.moreBlock) {
-        self.moreBlock(!_model.isOpening);
-    }
-    
-    _model.isOpening = !_model.isOpening;
+
 }
 
 #pragma -mark - MLEmojiLabelDelegate

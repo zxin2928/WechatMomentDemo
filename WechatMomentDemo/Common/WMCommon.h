@@ -24,6 +24,7 @@
 #import "WMRequestManager.h"
 #import "WMModelClass.h"
 #import "UIView+gesture.h"
+#import "WMSql.h"
 
 #define isPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)

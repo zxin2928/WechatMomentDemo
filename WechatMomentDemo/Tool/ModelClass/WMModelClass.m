@@ -22,11 +22,15 @@
             momentModel.avatar = momentModel.sender.avatar;
             momentModel.username = momentModel.sender.username;
             momentModel.nick = momentModel.sender.nick;
-            
+            momentModel.momentId = i+1;
+
             //图片数据
             NSMutableArray *imageArray = [NSMutableArray array];
             for (int j = 0; j < momentModel.images.count; j++) {
                 WMImageModel *imageModel = [WMImageModel modelWithJSON:[momentModel.images objectAtIndexSafe:j]];
+                imageModel.momentId = momentModel.momentId;
+                imageModel.imageId = (i+1)*10+j;
+                [[WMSql shared]insertMomentImage:imageModel];
                 [imageArray addObjectSafe:imageModel];
             }
             momentModel.images = imageArray;
@@ -38,14 +42,21 @@
                 commentModel.avatar = commentModel.sender.avatar;
                 commentModel.username = commentModel.sender.username;
                 commentModel.nick = commentModel.sender.nick;
-                
+                commentModel.commentId = (i+1)*10+k;
+                commentModel.momentId = momentModel.momentId;
+                [[WMSql shared]insertMomentComent:commentModel];
                 [commentArray addObjectSafe:commentModel];
             }
             momentModel.comments = commentArray;
             
+            
             [momentModel caculateCellHeight];
             
             if (momentModel.content || momentModel.images.count > 0) {
+                if (momentModel.content.length == 0) {
+                    momentModel.content = @"";
+                }
+                [[WMSql shared]insertMoment:momentModel];
                 [dataAry addObject:momentModel];
             }
             

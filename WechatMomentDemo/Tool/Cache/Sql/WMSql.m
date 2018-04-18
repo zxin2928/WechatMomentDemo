@@ -9,10 +9,11 @@
 #import "WMSql.h"
 #import <FMDB.h>
 #import "WMMomentModel.h"
+#import "WMCommon.h"
 
 const NSString * TABLE_MOMENT = @"table_moment";
-const NSString * TABLE_SENDER = @"table_sender";
-const NSString * TABLE_COMENT = @"table_coment";
+const NSString * TABLE_IMAGE = @"table_image";
+const NSString * TABLE_COMMENT = @"table_comment";
 
 @interface WMSql ()
 
@@ -50,6 +51,7 @@ const NSString * TABLE_COMENT = @"table_coment";
 {
     [self creatMomentTable];
     [self creatCommentTable];
+    [self creatImageTable];
     
     [self upgradeDB];
 }
@@ -89,15 +91,44 @@ const NSString * TABLE_COMENT = @"table_coment";
     __block BOOL result  = NO ;
     [self.queue inDatabase:^(FMDatabase *db) {
         if ([db open]) {
-            NSString * sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (commentId integer primary key,momentId integer,avatar text,username text,nick text)",TABLE_COMENT];
+            NSString * sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (commentId integer primary key,momentId integer,content text,avatar text,username text,nick text)",TABLE_COMMENT];
             result = [db executeUpdate:sql];
             if (result) {
                 
-                NSLog(@"创建TABLE_COMENT数据表成功");
+                NSLog(@"创建TABLE_COMMENT数据表成功");
                 
             }else{
                 
-                NSLog(@"创建TABLE_COMENT数据表失败");
+                NSLog(@"创建TABLE_COMMENT数据表失败");
+            }
+            
+        }else{
+            
+            result = NO ;
+            NSLog(@"数据库打开失败");
+        }
+        
+        [db close ];
+        
+    }];
+    
+    return result ;
+}
+
+-(BOOL)creatImageTable{
+    
+    __block BOOL result  = NO ;
+    [self.queue inDatabase:^(FMDatabase *db) {
+        if ([db open]) {
+            NSString * sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (imageId integer primary key,momentId integer,url text)",TABLE_IMAGE];
+            result = [db executeUpdate:sql];
+            if (result) {
+                
+                NSLog(@"创建TABLE_IMAGE数据表成功");
+                
+            }else{
+                
+                NSLog(@"创建TABLE_IMAGE数据表失败");
             }
             
         }else{
@@ -159,6 +190,178 @@ const NSString * TABLE_COMENT = @"table_coment";
     
     // 递归判断是否需要升级
     [self upgrade:oldVersion];
+}
+
+
+#pragma mark - 插入表
+-(BOOL)insertMoment:(WMMomentModel*)momentModel
+{
+    __block BOOL result = NO ;
+    [self.queue inDatabase:^(FMDatabase *db) {
+        
+        if ([db open]) {
+            momentModel.content = [momentModel.content stringByReplacingOccurrencesOfString:@"'" withString:@""];
+
+            NSString *sql = [NSString stringWithFormat:@"insert or replace into table_moment (momentId,content,avatar,username,nick) values (%d,'%@','%@','%@','%@')",momentModel.momentId,momentModel.content,momentModel.avatar,momentModel.username,momentModel.nick];
+            result = [db executeUpdate:sql];
+            
+            if (result) {
+                NSLog(@"插入WMMomentModel数据成功");
+            }else{
+                NSLog(@"插入WMMomentModel数据失败");
+            }
+        }else{
+            result = NO ;
+            NSLog(@"数据插入失败");
+        }
+        
+        [db close];
+    }];
+    
+    return result;
+}
+
+-(BOOL)insertMomentComent:(WMCommentModel*)comentModel
+{
+    __block BOOL result = NO ;
+    [self.queue inDatabase:^(FMDatabase *db) {
+        
+        if ([db open]) {
+            NSString *sql = [NSString stringWithFormat:@"insert or replace into table_comment (commentId,momentId,content,avatar,username,nick) values (%d,%d,'%@','%@','%@','%@')",comentModel.commentId,comentModel.momentId,comentModel.content,comentModel.avatar,comentModel.username,comentModel.nick];
+            result = [db executeUpdate:sql];
+            
+            if (result) {
+                NSLog(@"插入WMCommentModel数据成功");
+            }else{
+                NSLog(@"插入WMCommentModel数据失败");
+            }
+        }else{
+            result = NO ;
+            NSLog(@"数据插入失败");
+        }
+        
+        [db close];
+    }];
+    
+    return result;
+}
+
+-(BOOL)insertMomentImage:(WMImageModel*)imageModel
+{
+    __block BOOL result = NO ;
+    [self.queue inDatabase:^(FMDatabase *db) {
+        
+        if ([db open]) {
+            NSString *sql = [NSString stringWithFormat:@"insert or replace into table_image (imageId,momentId,url) values (%d,%d,'%@')",imageModel.imageId,imageModel.momentId,imageModel.url];
+            result = [db executeUpdate:sql];
+            
+            if (result) {
+                NSLog(@"插入WMImageModel数据成功");
+            }else{
+                NSLog(@"插入WMImageModel数据失败");
+            }
+        }else{
+            result = NO ;
+            NSLog(@"数据插入失败");
+        }
+        
+        [db close];
+    }];
+    
+    return result;
+}
+
+#pragma -mark - 查询表
+-(NSMutableArray*)queryMomentWithPage:(int)page
+{
+    int startNum = PAGE_NUM*page;
+    int num = PAGE_NUM;
+    
+    NSMutableArray *momentArray = [NSMutableArray array];
+    
+    [self.queue inDatabase:^(FMDatabase *db) {
+        
+        if ([db open]) {
+            NSString *sql = [NSString stringWithFormat:@"select * from table_moment limit %d,%d",startNum,num];
+            FMResultSet * set   = [db executeQuery:sql];
+            
+            while ([set next]) {
+                WMMomentModel *momentModel = [[WMMomentModel alloc]init];
+                
+                momentModel.momentId = [set intForColumn:@"momentId"];
+                momentModel.content = [set stringForColumn:@"content"];
+                momentModel.avatar = [set stringForColumn:@"avatar"];
+                momentModel.username = [set stringForColumn:@"username"];
+                momentModel.nick = [set stringForColumn:@"nick"];
+
+                [momentArray addObject:momentModel];
+            }
+        }else{
+            
+        }
+        [db close];
+    }];
+    
+    NSMutableArray *returnArray = [NSMutableArray array];
+    for (int i = 0; i<momentArray.count; i++) {
+        WMMomentModel *momentModel = [momentArray objectAtIndexSafe:i];
+        
+        NSMutableArray *imageArray = [NSMutableArray array];
+        [self.queue inDatabase:^(FMDatabase *db) {
+            
+            if ([db open]) {
+                NSString *sqlcoment = [NSString stringWithFormat:@"select * from table_image where momentId = %d",momentModel.momentId];
+                FMResultSet * set = [db executeQuery:sqlcoment];
+                
+                while ([set next]) {
+                    WMImageModel *imageModel = [[WMImageModel alloc]init];
+                    
+                    imageModel.imageId = [set intForColumn:@"imageId"];
+                    imageModel.momentId = [set intForColumn:@"momentId"];
+                    imageModel.url = [set stringForColumn:@"url"];
+                    
+                    [imageArray addObject:imageModel];
+                }
+            }else{
+            }
+            
+            [db close];
+        }];
+        momentModel.images = imageArray;
+
+        
+        NSMutableArray *commentArray = [NSMutableArray array];
+        [self.queue inDatabase:^(FMDatabase *db) {
+            
+            if ([db open]) {
+                NSString *sqlcoment = [NSString stringWithFormat:@"select * from table_comment where momentId = %d",momentModel.momentId];
+                FMResultSet * set   = [db executeQuery:sqlcoment];
+                
+                while ([set next]) {
+                    WMCommentModel *commentModel = [[WMCommentModel alloc]init];
+                    
+                    commentModel.commentId = [set intForColumn:@"commentId"];
+                    commentModel.momentId = [set intForColumn:@"momentId"];
+                    commentModel.content = [set stringForColumn:@"content"];
+                    commentModel.avatar = [set stringForColumn:@"avatar"];
+                    commentModel.username = [set stringForColumn:@"username"];
+                    commentModel.nick = [set stringForColumn:@"nick"];
+                    
+                    [commentArray addObject:commentModel];
+                }
+            }else{
+                
+            }
+            [db close];
+        }];
+        momentModel.comments = commentArray;
+
+        [momentModel caculateCellHeight];
+        
+        [returnArray addObjectSafe:momentModel];
+    }
+    
+    return returnArray;
 }
 
 @end

@@ -85,27 +85,8 @@
         CGFloat width = kScreenWidth - 70;
         CGFloat strH = [emojiLable preferredSizeWithMaxWidth:width].height;
         
-        MLEmojiLabel *emojiLable6 = [MLEmojiLabel new];
-        emojiLable6.numberOfLines = 6;
-        emojiLable6.textAlignment = NSTextAlignmentJustified;
-        emojiLable6.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
-        emojiLable6.font = [UIFont systemFontOfSize:14];
-        emojiLable6.isNeedAtAndPoundSign = YES;
-        emojiLable6.text = self.content;
-        CGFloat width6 = kScreenWidth - 70;
-        CGFloat strH6 = [emojiLable6 preferredSizeWithMaxWidth:width6].height;
-        if (strH > strH6) {
-            self.isShowMoreButton = YES;
-            self.moreButtonHeight = 20;
-        }else{
-            
-        }
-        
-        if (self.isOpening) {
-            self.contentHeight = strH;
-        }else{
-            self.contentHeight = strH6;
-        }
+        self.contentHeight = strH;
+
         
         //计算评论区高度
         CGFloat commentHeight = 0;

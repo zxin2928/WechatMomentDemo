@@ -15,8 +15,8 @@
 @property (copy, nonatomic) NSString *username;
 @property (copy, nonatomic) NSString *nick;
 
-@property (assign, nonatomic) NSInteger momentId;
-@property (assign, nonatomic) NSInteger commentId;
+@property (assign, nonatomic) int momentId;
+@property (assign, nonatomic) int commentId;
 
 @end
 
@@ -24,7 +24,8 @@
 
 @property (copy, nonatomic) NSString *url;
 
-@property (assign, nonatomic) NSInteger momentId;
+@property (assign, nonatomic) int imageId;
+@property (assign, nonatomic) int momentId;
 
 @end
 
@@ -36,8 +37,8 @@
 @property (copy, nonatomic) NSString *content;
 @property (strong, nonatomic) WMSenderModel *sender;
 
-@property (assign, nonatomic) NSInteger commentId;
-@property (assign, nonatomic) NSInteger momentId;
+@property (assign, nonatomic) int commentId;
+@property (assign, nonatomic) int momentId;
 //每条评论cell的高度
 @property (assign, nonatomic) CGFloat commentCellHeight;
 @property (assign, nonatomic) BOOL isFirstComment;
@@ -54,10 +55,7 @@
 @property (strong, nonatomic) NSMutableArray<WMCommentModel*> *comments;
 @property (strong, nonatomic) WMSenderModel *sender;
 
-@property (assign, nonatomic) NSInteger momentId;
-// 是否展开
-@property (nonatomic, assign) BOOL isOpening;
-@property (nonatomic, assign) BOOL isShowMoreButton;
+@property (assign, nonatomic) int momentId;
 
 @property (assign, nonatomic) CGFloat contentHeight;
 

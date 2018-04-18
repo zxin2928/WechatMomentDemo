@@ -40,12 +40,51 @@
 }
 
 - (void)firstAppear{
-    [[WMRequestManager sharedManager]getMomentInfoWithKey:MOMENT_FIRST delegate:self];
+    NSString *key = MOMENT_FIRST;
+    NSMutableArray *datas = [[WMSql shared]queryMomentWithPage:0];
+    if (datas.count > 0) {
+        self.dataArray = datas;
+        
+        [self configTableView];
+
+        key = MOMENT_HEAD;
+    }else{
+        key = MOMENT_FIRST;
+    }
+    [self requestMomentWithKey:key];
 }
 
 - (void)footerRefreshing
 {
+    int page = (int)self.dataArray.count / PAGE_NUM;
+    NSMutableArray *newMomentArray = [[WMSql shared]queryMomentWithPage:page];
+    WMMomentModel *lastNewModel = newMomentArray.lastObject;
+    WMMomentModel *lastOldModel = self.dataArray.lastObject;
+    if (lastNewModel.momentId == lastOldModel.momentId) {
+        
+    }else
+    {
+        for(WMMomentModel *model in newMomentArray){
+            if(![self.dataArray containsObject:model]){
+                [self.dataArray addObjectSafe:model];
+            }
+        }
+    }
+    [self.momentTable reloadData];
     
+    if ([self.momentTable.mj_footer isRefreshing]) {
+        [self.momentTable.mj_footer endRefreshing];
+    }
+    
+    if (newMomentArray.count < PAGE_NUM || newMomentArray.count == 0)
+    {
+        [self.momentTable.mj_footer endRefreshingWithNoMoreData];
+    }
+    
+}
+
+-(void)requestMomentWithKey:(NSString*)key{
+    [[WMRequestManager sharedManager]getMomentInfoWithKey:key delegate:self];
 }
 
 #pragma mark - setupHeadView
@@ -62,32 +101,36 @@
 }
 
 #pragma -mark private method
-
+-(void)configTableView{
+    if (!_refreshHeader.superview) {
+        
+        _refreshHeader = [WMMomentRefreshView refreshHeaderWithCenter:CGPointMake(40, -15)];
+        _refreshHeader.scrollView = self.momentTable;
+        WS(weakSelf);
+        __weak typeof(_refreshHeader) weakHeader = _refreshHeader;
+        [_refreshHeader setRefreshingBlock:^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakHeader endRefreshing];
+            });
+        }];
+        [self.momentTable.superview addSubview:_refreshHeader];
+    } else {
+        [self.momentTable.superview bringSubviewToFront:_refreshHeader];
+    }
+    [self setupHeadView];
+    [self addFooterRefreshWithView:self.momentTable];
+}
 
 #pragma -mark - WMRequestDelegate
 -(void)requestSuccess:(WMRequest *)request data:(id)data url:(NSString *)url{
     NSMutableArray *datas = [WMModelClass momentListWithData:data];
-    [self.dataArray addObjectsFromArray:datas];
-    
+
     if ([request.key isEqualToString:MOMENT_FIRST]) {
-        if (!_refreshHeader.superview) {
-            
-            _refreshHeader = [WMMomentRefreshView refreshHeaderWithCenter:CGPointMake(40, -15)];
-            _refreshHeader.scrollView = self.momentTable;
-            WS(weakSelf);
-            __weak typeof(_refreshHeader) weakHeader = _refreshHeader;
-            [_refreshHeader setRefreshingBlock:^{
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [weakHeader endRefreshing];
-                });
-            }];
-            [self.momentTable.superview addSubview:_refreshHeader];
-        } else {
-            [self.momentTable.superview bringSubviewToFront:_refreshHeader];
-        }
+        self.dataArray = [[WMSql shared]queryMomentWithPage:0];
+
+        [self configTableView];
     }
-    [self setupHeadView];
-    [self addFooterRefreshWithView:self.momentTable];
+
     [self.momentTable reloadData];
 }
 
@@ -114,16 +157,7 @@
     NSString *identifier = [NSString stringWithFormat:@"WMMomentCell-%zi-%zi",momentModel.images.count,momentModel.comments.count];
     WMMomentCell *momentCell = [WMMomentCell cellWithTableView:tableView identifier:identifier];
     momentCell.model = momentModel;
-    
-    __weak typeof(momentCell) cell = momentCell;
-    momentCell.moreBlock = ^(BOOL isToOpening) {
-        momentModel.cellHeight = 0;
-        momentModel.isOpening = isToOpening;
-        [momentModel caculateCellHeight];
-        [tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
-
-    };
-    
+        
     return momentCell;
 }
 
