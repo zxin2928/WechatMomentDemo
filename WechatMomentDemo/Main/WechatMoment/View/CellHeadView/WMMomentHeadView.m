@@ -30,7 +30,7 @@
         self.backgroundColor = [UIColor whiteColor];
         
         _backView = [UIView new];
-        _backView.backgroundColor = HEX_RGB(COLOR_BACKGROUND);
+        _backView.backgroundColor = HEX_RGB(0x696A6E);
         [self addSubview:_backView];
         [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.trailing.equalTo(self);
@@ -75,7 +75,7 @@
         
         [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.iconImageView.mas_left).offset(-15);
-            make.centerY.equalTo(self.iconImageView);
+            make.centerY.equalTo(self.iconImageView).offset(-10);
         }];
     }
     return self;
@@ -83,6 +83,9 @@
 
 -(void)setModel:(WMPersonModel *)model{
     _model = model;
+    
+    NSString *name = _model.nick ? _model.nick : (_model.username ? _model.username :@"");
+    _nameLabel.text = name;
     [_iconImageView downloadImageWithURL:model.avatar];
     [_backgroundImageView downloadImageWithURL:model.profileImage];
 
