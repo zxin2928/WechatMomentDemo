@@ -17,7 +17,9 @@
     {
         WMPersonModel *personModel = [WMPersonModel modelWithJSON:dic];
         personModel.profileImage = [dic objectForKey:@"profile-image"];
-        [[WMSql shared]insertPerson:personModel];
+        if (personModel.profileImage.length > 0) {
+            [[WMSql shared]insertPerson:personModel];
+        }
         return personModel;
     }
     @catch (NSException *exception)

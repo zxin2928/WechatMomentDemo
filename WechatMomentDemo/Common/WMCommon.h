@@ -17,7 +17,6 @@
 #import "NSMutableDictionary+Safe.h"
 #import "UINavigationController+FullscreenPopGesture.h"
 #import <AFNetworking.h>
-#import <MLEmojiLabel.h>
 #import "WMRequest.h"
 #import "WMRequestCommon.h"
 #import "WMRequestManager.h"

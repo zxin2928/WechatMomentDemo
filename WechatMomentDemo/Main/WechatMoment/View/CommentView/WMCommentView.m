@@ -56,6 +56,7 @@
     
 }
 
+/** 绘制评论背景气泡 */
 -(void)drawRect:(CGRect)rect{
     CGFloat viewW = rect.size.width;
     CGFloat viewH = rect.size.height;
@@ -123,6 +124,7 @@
     
 }
 
+#pragma -mark - commentTable
 -(UITableView *)commentTable
 {
     if (!_commentTable) {

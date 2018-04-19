@@ -88,15 +88,5 @@
 
 }
 
--(void)downloadImageWithUrl:(NSURL*)url imageView:(UIImageView*)imageView{
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [UIImage imageWithData:data];
-    if (image) {
-        [[NSOperationQueue mainQueue]addOperationWithBlock:^{
-            imageView.image = image;
-        }];
-    }
-}
-
 @end
 

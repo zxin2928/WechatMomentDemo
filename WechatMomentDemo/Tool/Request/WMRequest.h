@@ -45,6 +45,4 @@ typedef NS_ENUM(NSInteger, WMRequestStatus)
 
 - (void)GET:(NSString *)url parameters:(NSMutableDictionary *)parameters delegate:(id<WMRequestDelegate>)delegate;
 
-- (void)POST:(NSString *)url parameters:(NSMutableDictionary *)parameters delegate:(id<WMRequestDelegate>)delegate;
-
 @end

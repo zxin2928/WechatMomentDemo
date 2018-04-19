@@ -38,31 +38,6 @@
     }];
 }
 
-- (void)POST:(NSString *)url parameters:(NSMutableDictionary *)parameters delegate:(id<WMRequestDelegate>)delegate
-{
-    self.delegate = delegate;
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = nil;
-    manager.securityPolicy = [AFSecurityPolicy defaultPolicy];
-    manager.securityPolicy.allowInvalidCertificates = YES;
-    manager.securityPolicy.validatesDomainName = NO;
-    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-
-    self.sessionManager = manager;
-    
-    [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        self.requestUrl = task.response.URL.absoluteString;
-        
-        [self onGetResponseObject:responseObject];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        self.requestUrl = task.response.URL.absoluteString;
-        [self onGetError:error];
-    }];
-}
-
 -(void)onGetResponseObject:(id)responseObject{
     @try
     {

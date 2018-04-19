@@ -15,8 +15,10 @@
 
 + (instancetype)sharedManager;
 
+/** 请求朋友圈头部个人信息 */
 - (void)getPersonInfoWithKey:(NSString*)key delegate:(id<WMRequestDelegate>)delegate;
 
+/** 请求朋友圈列表数据 */
 - (void)getMomentInfoWithKey:(NSString *)key delegate:(id<WMRequestDelegate>)delegate;
 
 @end

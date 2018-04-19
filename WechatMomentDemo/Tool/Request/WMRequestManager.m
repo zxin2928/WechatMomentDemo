@@ -71,26 +71,6 @@ typedef NS_ENUM(NSInteger, WMRequestType)
     return request;
 }
 
-- (WMRequest *)POST:(NSString *)url parameters:(NSDictionary *)parameters key:(NSString *)key delegate:(id<WMRequestDelegate>)delegate
-{
-    WMRequest *request = self.requests[key];
-    if (request == nil)
-    {
-        request = [[WMRequest alloc] init];
-        
-        self.requests[key] = request;
-        request.key = key;
-    }
-    else
-    {
-        [request.sessionManager invalidateSessionCancelingTasks:YES];
-    }
-    
-    NSMutableDictionary *dicTemp = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [request POST:url parameters:dicTemp delegate:delegate];
-    return request;
-}
-
 -(NSString*)getUrlStringWithType:(WMRequestType)type{
     NSString *url = @"";
     switch (type) {

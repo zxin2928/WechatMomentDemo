@@ -22,31 +22,25 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self setup];
+        NSMutableArray *temp = [NSMutableArray new];
+        
+        for (int i = 0; i < 9; i++) {
+            UIImageView *imageView = [UIImageView new];
+            [self addSubview:imageView];
+            imageView.userInteractionEnabled = YES;
+            imageView.tag = i;
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            imageView.clipsToBounds = YES;
+            imageView.backgroundColor = HEX_RGB(COLOR_BACKGROUND);
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageView:)];
+            [imageView addGestureRecognizer:tap];
+            [temp addObject:imageView];
+        }
+        
+        self.imageViewsArray = temp;
     }
     return self;
 }
-
-- (void)setup
-{
-    NSMutableArray *temp = [NSMutableArray new];
-    
-    for (int i = 0; i < 9; i++) {
-        UIImageView *imageView = [UIImageView new];
-        [self addSubview:imageView];
-        imageView.userInteractionEnabled = YES;
-        imageView.tag = i;
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.clipsToBounds = YES;
-        imageView.backgroundColor = HEX_RGB(COLOR_BACKGROUND);
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageView:)];
-        [imageView addGestureRecognizer:tap];
-        [temp addObject:imageView];
-    }
-    
-    self.imageViewsArray = [temp copy];
-}
-
 
 - (void)setPicPathStringsArray:(NSArray *)picPathStringsArray
 {

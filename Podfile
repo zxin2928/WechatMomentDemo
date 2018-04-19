@@ -7,8 +7,6 @@ target 'WechatMomentDemo' do
     pod 'Masonry'
     pod 'AFNetworking'
     pod 'YYKit'
-    pod 'YYKeyboardManager'
     pod 'MJRefresh'
-    pod 'MLEmojiLabel'
 
 end

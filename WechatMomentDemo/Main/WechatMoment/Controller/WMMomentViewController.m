@@ -163,7 +163,17 @@
 }
 
 -(void)requestFail:(WMRequest *)request error:(NSError *)error url:(NSString *)url{
-    
+    if ([request.key isEqualToString:MOMENT_FIRST]) {
+        if (request.status == WMRequestStatus_FAIL) {
+        }
+        
+        if (request.status == WMRequestStatus_NETWORK_ERROR) {
+            
+        }
+        
+        NSLog(@"%@", request.message);
+
+    }
 }
 
 #pragma -mark - WMMomentCellDelegate

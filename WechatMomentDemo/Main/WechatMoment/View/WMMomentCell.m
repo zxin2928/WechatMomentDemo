@@ -238,14 +238,5 @@
     return cell;
 }
 
-#pragma -mark - UITableViewDelegate and UITableViewDataSource
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _layout.model.comments.count;
-}
-
 
 @end
