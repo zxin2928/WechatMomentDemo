@@ -42,6 +42,7 @@
         view.backgroundColor = HEX_RGB(white);
         
         _avatarImageView = [UIImageView new];
+        _avatarImageView.image = [UIImage imageNamed:@"AlbumReflashIcon"];
         _avatarImageView.backgroundColor = HEX_RGB(white);
         [view addSubview:_avatarImageView];
         [_avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -119,8 +120,10 @@
     NSString *nickName = _model.nick ? _model.nick : (_model.username ? _model.username : @"");
     
     [_nicknameButton setTitle:nickName forState:UIControlStateNormal];
+    
     [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"AlbumReflashIcon"]];
 
+    
     _contentLab.text = _model.content;
     
     _imageContainerView.imageWidth = _model.imageWidth;

@@ -39,10 +39,12 @@
         }];
         
         _backgroundImageView = [UIImageView new];
+        _backgroundImageView.image = [UIImage imageNamed:@"AlbumReflashIcon"];
         _backgroundImageView.contentMode = UIViewContentModeScaleAspectFit;
         
         WS(weakSelf);
         _iconImageView = [UIImageView new];
+        _iconImageView.image = [UIImage imageNamed:@"AlbumReflashIcon"];
         _iconImageView.userInteractionEnabled = YES;
         _iconImageView.layer.borderColor = [UIColor whiteColor].CGColor;
         _iconImageView.layer.borderWidth = 3;
@@ -82,9 +84,8 @@
 -(void)setModel:(WMPersonModel *)model{
     _model = model;
     [_backgroundImageView sd_setImageWithURL:[NSURL URLWithString:_model.profileImage] placeholderImage:[UIImage imageNamed:@"AlbumReflashIcon"]];
-    
-    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"AlbumReflashIcon"]];
 
+    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"AlbumReflashIcon"]];
 
 }
 

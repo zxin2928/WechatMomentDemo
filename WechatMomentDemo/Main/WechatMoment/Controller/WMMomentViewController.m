@@ -113,10 +113,8 @@
         _refreshHeader = [WMMomentRefreshView refreshHeaderWithCenter:CGPointMake(40, -15)];
         _refreshHeader.scrollView = self.momentTable;
         WS(weakSelf);
-        __weak typeof(_refreshHeader) weakHeader = _refreshHeader;
         [_refreshHeader setRefreshingBlock:^{
             [weakSelf requestMomentWithKey:MOMENT_HEAD];
-
         }];
         [self.momentTable.superview addSubview:_refreshHeader];
     } else {
@@ -138,6 +136,7 @@
         }
         
     }else if ([request.key isEqualToString:PERSON_FIRST] || [request.key isEqualToString:PERSON_REFRESH]){
+        [WMModelClass personModelWithData:data];
         
         WMPersonModel *personModel = [[WMSql shared]queryCurrentPerson];
         self.headerView.model = personModel;
@@ -166,7 +165,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     WMMomentModel *momentModel = [self.dataArray objectAtIndexSafe:indexPath.row];
-    NSString *identifier = [NSString stringWithFormat:@"WMMomentCell-%zi-%zi",momentModel.images.count,momentModel.comments.count];
+    NSString *identifier = [NSString stringWithFormat:@"WMMomentCell-%zi-%zi",momentModel.images.count,indexPath.row];
     WMMomentCell *momentCell = [WMMomentCell cellWithTableView:tableView identifier:identifier];
     momentCell.model = momentModel;
         

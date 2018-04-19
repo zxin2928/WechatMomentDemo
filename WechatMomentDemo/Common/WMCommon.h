@@ -17,7 +17,6 @@
 #import "NSMutableDictionary+Safe.h"
 #import "UINavigationController+FullscreenPopGesture.h"
 #import <AFNetworking.h>
-#import "UIImageView+WebCache.h"
 #import <MLEmojiLabel.h>
 #import "WMRequest.h"
 #import "WMRequestCommon.h"
@@ -25,6 +24,7 @@
 #import "WMModelClass.h"
 #import "UIView+gesture.h"
 #import "WMSql.h"
+#import "UIImageView+WebCache.h"
 
 #define isPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)

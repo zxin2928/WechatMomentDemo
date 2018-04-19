@@ -38,6 +38,7 @@
             frame = CGRectMake((self.imageWidth + 5 ) * (i % 3), (self.imageHeight + 5) * (i / 3 ), self.imageWidth, self.imageHeight);
         }
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+        imageView.image = [UIImage imageNamed:@"AlbumReflashIcon"];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
         imageView.backgroundColor = [UIColor whiteColor];
@@ -50,10 +51,9 @@
         
         WMImageModel *imageModel = [imageUrls objectAtIndexSafe:i];
         NSString *urlStr = imageModel.url;;
-        [imageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"AlbumReflashIcon"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            imageView.userInteractionEnabled = YES;
+        [imageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"AlbumReflashIcon"]];
 
-        }];
+        
         [_imageViews addObject:imageView];
     }
 }
