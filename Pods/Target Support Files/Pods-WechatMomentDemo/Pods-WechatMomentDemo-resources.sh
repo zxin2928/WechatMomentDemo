@@ -93,17 +93,9 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
-  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.plist"
-  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_ExpressionImage.plist"
-  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle"
-  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle/gifexpression.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
-  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.plist"
-  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_ExpressionImage.plist"
-  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle"
-  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle/gifexpression.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
