@@ -40,7 +40,7 @@
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
-        imageView.backgroundColor = [UIColor redColor];
+        imageView.backgroundColor = [UIColor whiteColor];
         imageView.tag = i;
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];

@@ -18,7 +18,7 @@
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
-@property (nonatomic, weak) WMMomentHeadView *headerView;
+@property (strong, nonatomic) WMMomentHeadView *headerView;
 
 @end
 
@@ -40,17 +40,28 @@
 }
 
 - (void)firstAppear{
+    NSString *personKey = PERSON_FIRST;
     NSString *key = MOMENT_FIRST;
     NSMutableArray *datas = [[WMSql shared]queryMomentWithPage:0];
     if (datas.count > 0) {
         self.dataArray = datas;
         
         [self configTableView];
-
+        
         key = MOMENT_HEAD;
     }else{
         key = MOMENT_FIRST;
     }
+    
+    WMPersonModel *personModel = [[WMSql shared]queryCurrentPerson];
+    if (personModel) {
+        personKey = PERSON_REFRESH;
+    }else{
+        personKey = PERSON_FIRST;
+    }
+    [self setupHeadView];
+
+    [[WMRequestManager sharedManager]getPersonInfoWithKey:personKey delegate:self];
     [self requestMomentWithKey:key];
 }
 
@@ -90,14 +101,7 @@
 #pragma mark - setupHeadView
 - (void)setupHeadView
 {
-    WS(weakSelf);
-    WMMomentHeadView *headerView = [[WMMomentHeadView alloc] init];
-    headerView.frame = CGRectMake(0, 0, kScreenWidth, 260);
-    [headerView setIconButtonClick:^{
-
-    }];
-    self.headerView = headerView;
-    self.momentTable.tableHeaderView = headerView;
+    [self headerView];
 }
 
 #pragma -mark private method
@@ -117,18 +121,24 @@
     } else {
         [self.momentTable.superview bringSubviewToFront:_refreshHeader];
     }
-    [self setupHeadView];
     [self addFooterRefreshWithView:self.momentTable];
 }
 
 #pragma -mark - WMRequestDelegate
 -(void)requestSuccess:(WMRequest *)request data:(id)data url:(NSString *)url{
-    NSMutableArray *datas = [WMModelClass momentListWithData:data];
 
-    if ([request.key isEqualToString:MOMENT_FIRST]) {
-        self.dataArray = [[WMSql shared]queryMomentWithPage:0];
-
-        [self configTableView];
+    if ([request.key isEqualToString:MOMENT_FIRST] || [request.key isEqualToString:MOMENT_HEAD]) {
+        [WMModelClass momentListWithData:data];
+        if ([request.key isEqualToString:MOMENT_FIRST]) {
+            self.dataArray = [[WMSql shared]queryMomentWithPage:0];
+            
+            [self configTableView];
+        }
+        
+    }else if ([request.key isEqualToString:PERSON_FIRST] || [request.key isEqualToString:PERSON_REFRESH]){
+        
+        WMPersonModel *personModel = [[WMSql shared]queryCurrentPerson];
+        self.headerView.model = personModel;
     }
 
     [self.momentTable reloadData];
@@ -193,4 +203,16 @@
     return _momentTable;
 }
 
+#pragma -mark - headerView
+-(WMMomentHeadView *)headerView{
+    if (_headerView == nil) {
+        _headerView = [[WMMomentHeadView alloc] init];
+        _headerView.frame = CGRectMake(0, 0, kScreenWidth, 260);
+        [_headerView setIconButtonClick:^{
+            
+        }];
+        self.momentTable.tableHeaderView = _headerView;
+    }
+    return _headerView;
+}
 @end

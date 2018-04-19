@@ -9,6 +9,13 @@
 #import "WMRequestManager.h"
 #import "WMCommon.h"
 
+typedef NS_ENUM(NSInteger, WMRequestType)
+{
+    WMRequestType_PERSON,
+    WMRequestType_MOMENT,
+    WMRequestType_OTHER
+};
+
 @interface WMRequestManager ()
 
 @property (strong, nonatomic) NSMutableDictionary *requests;
@@ -84,10 +91,39 @@
     return request;
 }
 
+-(NSString*)getUrlStringWithType:(WMRequestType)type{
+    NSString *url = @"";
+    switch (type) {
+        case WMRequestType_PERSON:
+            url = @"/user/jsmith";
+            break;
+        case WMRequestType_MOMENT:
+            url = @"/user/jsmith/tweets";
+            break;
+        case WMRequestType_OTHER:
+            url = @"";
+            break;
+        default:
+            break;
+    }
+    
+    return url;
+}
+
+-(void)requestType:(WMRequestType)type Key:(NSString*)key parameters:(NSDictionary*)oarameters delegate:(id<WMRequestDelegate>)delegate{
+    NSString *str = [self getUrlStringWithType:type];
+    NSString *url = [NSString stringWithFormat:@"%@%@",self.strURL,str];
+    [self GET:url parameters:oarameters key:key delegate:delegate];
+}
+
+#pragma -mark - public method
+- (void)getPersonInfoWithKey:(NSString*)key delegate:(id<WMRequestDelegate>)delegate{
+    [self requestType:WMRequestType_PERSON Key:key parameters:nil delegate:delegate];
+}
+
 - (void)getMomentInfoWithKey:(NSString *)key delegate:(id<WMRequestDelegate>)delegate
 {
-    NSString *strUrl = [NSString stringWithFormat:@"%@/user/jsmith/tweets",self.strURL];
-    [self GET:strUrl parameters:nil key:key delegate:delegate];
+    [self requestType:WMRequestType_MOMENT Key:key parameters:nil delegate:delegate];
 }
 
 @end

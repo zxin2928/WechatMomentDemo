@@ -8,8 +8,10 @@
 
 #import "WMSql.h"
 #import <FMDB.h>
+#import "WMPersonModel.h"
 #import "WMMomentModel.h"
 #import "WMCommon.h"
+const NSString * TABLE_PERSON = @"table_person";
 
 const NSString * TABLE_MOMENT = @"table_moment";
 const NSString * TABLE_IMAGE = @"table_image";
@@ -49,12 +51,40 @@ const NSString * TABLE_COMMENT = @"table_comment";
 #pragma mark - 创建表
 -(void)createTables
 {
+    [self creatPersonTable];
+    
     [self creatMomentTable];
     [self creatCommentTable];
     [self creatImageTable];
     
     [self upgradeDB];
 }
+
+-(BOOL)creatPersonTable{
+    
+    __block BOOL result  = NO ;
+    
+    [self.queue inDatabase:^(FMDatabase *db) {
+        if ([db open]) {
+            NSString * sqlstr = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (personId integer primary key,profileImage text,avatar text,username text,nick text)",TABLE_PERSON];
+            
+            result = [db executeUpdate:sqlstr];
+            if (result) {
+                NSLog(@"创建TABLE_PERSON数据表成功");
+            }else{
+                NSLog(@"创建TABLE_PERSON数据表失败");
+            }
+            
+        }else{
+            
+            result = NO ;
+            NSLog(@"数据库打开失败");
+        }
+        [db close ];
+    }];
+    return result ;
+}
+
 
 -(BOOL)creatMomentTable{
     
@@ -83,8 +113,6 @@ const NSString * TABLE_COMMENT = @"table_comment";
     }];
     return result ;
 }
-
-
 
 -(BOOL)creatCommentTable{
     
@@ -194,6 +222,33 @@ const NSString * TABLE_COMMENT = @"table_comment";
 
 
 #pragma mark - 插入表
+-(BOOL)insertPerson:(WMPersonModel*)personModel
+{
+    __block BOOL result = NO ;
+    [self.queue inDatabase:^(FMDatabase *db) {
+        
+        if ([db open]) {
+            personModel.profileImage = [personModel.profileImage stringByReplacingOccurrencesOfString:@"'" withString:@""];
+            
+            NSString *sql = [NSString stringWithFormat:@"insert or replace into table_person (personId,profileImage,avatar,username,nick) values (%d,'%@','%@','%@','%@')",personModel.personId,personModel.profileImage,personModel.avatar,personModel.username,personModel.nick];
+            result = [db executeUpdate:sql];
+            
+            if (result) {
+                NSLog(@"插入WMPersonModel数据成功");
+            }else{
+                NSLog(@"插入WMPersonModel数据失败");
+            }
+        }else{
+            result = NO ;
+            NSLog(@"数据插入失败");
+        }
+        
+        [db close];
+    }];
+    
+    return result;
+}
+
 -(BOOL)insertMoment:(WMMomentModel*)momentModel
 {
     __block BOOL result = NO ;
@@ -272,6 +327,29 @@ const NSString * TABLE_COMMENT = @"table_comment";
 }
 
 #pragma -mark - 查询表
+-(WMPersonModel*)queryCurrentPerson{
+    __block WMPersonModel *personModel;
+    [self.queue inDatabase:^(FMDatabase *db) {
+        if ([db open]) {
+            NSString *sql = [NSString stringWithFormat:@"select * from table_person"];
+            FMResultSet * set = [db executeQuery:sql];
+            
+            while ([set next]) {
+                personModel = [WMPersonModel new];
+                personModel.personId = [set intForColumn:@"personId"];
+                personModel.profileImage = [set stringForColumn:@"profileImage"];
+                personModel.avatar = [set stringForColumn:@"avatar"];
+                personModel.username = [set stringForColumn:@"username"];
+                personModel.nick = [set stringForColumn:@"nick"];
+            }
+        }else{
+            
+        }
+        [db close];
+    }];
+    return personModel;
+}
+
 -(NSMutableArray*)queryMomentWithPage:(int)page
 {
     int startNum = PAGE_NUM*page;

@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class WMPersonModel;
 
 @interface WMMomentHeadView : UIView
 
 @property (copy, nonatomic) void (^iconButtonClick)(void);
 
-- (void)updateHeight:(CGFloat)height;
+@property (strong, nonatomic) WMPersonModel *model;
 
 @end
 

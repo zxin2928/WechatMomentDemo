@@ -9,8 +9,22 @@
 #import "WMCommon.h"
 #import "WMModelClass.h"
 #import "WMMomentModel.h"
+#import "WMPersonModel.h"
 
 @implementation WMModelClass
++(WMPersonModel*)personModelWithData:(NSDictionary*)dic{
+    @try
+    {
+        WMPersonModel *personModel = [WMPersonModel modelWithJSON:dic];
+        personModel.profileImage = [dic objectForKey:@"profile-image"];
+        [[WMSql shared]insertPerson:personModel];
+        return personModel;
+    }
+    @catch (NSException *exception)
+    {
+        return nil;
+    }
+}
 
 + (NSMutableArray*)momentListWithData:(NSArray*)data{
     @try

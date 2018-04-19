@@ -8,8 +8,11 @@
 
 #import "WMMomentHeadView.h"
 #import "WMCommon.h"
+#import "WMPersonModel.h"
 
 @interface WMMomentHeadView()
+
+@property (strong, nonatomic) UIView *backView;
 
 @property (strong, nonatomic) UIImageView *backgroundImageView;
 
@@ -24,17 +27,23 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor whiteColor];
         
-        self.backgroundColor = [UIColor yellowColor];
+        _backView = [UIView new];
+        _backView.backgroundColor = HEX_RGB(COLOR_BACKGROUND);
+        [self addSubview:_backView];
+        [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.trailing.equalTo(self);
+            make.top.equalTo(self).offset(-40);
+            make.bottom.equalTo(self).offset(-25);
+        }];
         
         _backgroundImageView = [UIImageView new];
-        _backgroundImageView.image = [UIImage imageNamed:@"AlbumReflashIcon"];
-        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFit;
         
         WS(weakSelf);
         _iconImageView = [UIImageView new];
         _iconImageView.userInteractionEnabled = YES;
-        _iconImageView.image = [UIImage imageNamed:@"AlbumReflashIcon"];
         _iconImageView.layer.borderColor = [UIColor whiteColor].CGColor;
         _iconImageView.layer.borderWidth = 3;
         [_iconImageView setTapActionWithBlock:^{
@@ -46,14 +55,14 @@
         _nameLabel.textAlignment = NSTextAlignmentRight;
         _nameLabel.font = [UIFont boldSystemFontOfSize:15];
         
-        [self addSubview:_backgroundImageView];
+        [_backView addSubview:_backgroundImageView];
         [self addSubview:_iconImageView];
         [self addSubview:_nameLabel];
         
         [_backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self).offset(-20);
-            make.leading.trailing.equalTo(self);
-            make.bottom.equalTo(self).offset(-40);
+            make.top.equalTo(self.backView).offset(0);
+            make.leading.trailing.equalTo(self.backView);
+            make.bottom.equalTo(self.backView);
         }];
         
         [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -70,18 +79,14 @@
     return self;
 }
 
+-(void)setModel:(WMPersonModel *)model{
+    _model = model;
+    [_backgroundImageView sd_setImageWithURL:[NSURL URLWithString:_model.profileImage] placeholderImage:[UIImage imageNamed:@"AlbumReflashIcon"]];
+    
+    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"AlbumReflashIcon"]];
 
-- (void)updateHeight:(CGFloat)height
-{
-    self.height = height;
-    
-    if (self.height == 200) {
-        _backgroundImageView.contentMode = UIViewContentModeScaleToFill;
-    }else{
-        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
-    }
-    
-    [self layoutIfNeeded];
+
 }
+
 @end
 

@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+@class WMPersonModel;
+
 @class WMMomentModel;
 @class WMCommentModel;
 @class WMImageModel;
@@ -16,10 +18,13 @@
 +(instancetype)shared;
 -(void)createTables;
 
+-(BOOL)insertPerson:(WMPersonModel*)personModel;
+
 -(BOOL)insertMoment:(WMMomentModel*)momentModel;
 -(BOOL)insertMomentComent:(WMCommentModel*)comentModel;
 -(BOOL)insertMomentImage:(WMImageModel*)imageModel;
 
+-(WMPersonModel*)queryCurrentPerson;
 -(NSMutableArray*)queryMomentWithPage:(int)page;
 
 @end

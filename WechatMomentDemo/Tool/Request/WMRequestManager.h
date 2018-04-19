@@ -15,6 +15,8 @@
 
 + (instancetype)sharedManager;
 
+- (void)getPersonInfoWithKey:(NSString*)key delegate:(id<WMRequestDelegate>)delegate;
+
 - (void)getMomentInfoWithKey:(NSString *)key delegate:(id<WMRequestDelegate>)delegate;
 
 @end
