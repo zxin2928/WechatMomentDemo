@@ -11,119 +11,60 @@
 
 @implementation WMSenderModel
 
-
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    NSLog(@"WMSenderModel找不到Key----------------------------%@",key);
+}
 @end
 
 @implementation WMImageModel
-
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    NSLog(@"WMImageModel找不到Key----------------------------%@",key);
+}
 
 @end
 
 @implementation WMCommentModel
-
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    NSLog(@"WMCommentModel找不到Key----------------------------%@",key);
+}
 
 @end
 
 @implementation WMMomentModel
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    NSLog(@"WMMomentModel找不到Key----------------------------%@",key);
+}
 
--(void)caculateCellHeight{
-    switch (self.images.count)
-    {
-        case 0:
-        {
-            self.imageWidth = 0;
-            self.imageHeight = 0;
-            break;
-        }
-        case 1:
-        {
-            self.imageWidth = RATIO*300.0 / 2;
-            self.imageHeight = RATIO*350.0 / 2;
-            break;
-        }
-        default:
-        {
-            self.imageWidth = RATIO*193.0 / 2;
-            self.imageHeight = RATIO*193.0 / 2;
-            break;
-        }
+-(NSString *)content
+{
+    if (_content == nil) {
+        _content = @"";
+    }
+    NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:_content];
+    text.font = [UIFont systemFontOfSize:14];
+    
+    YYTextContainer * container = [YYTextContainer containerWithSize:CGSizeMake(kScreenWidth - 15 - 45 - 10 - 15, CGFLOAT_MAX)];
+    
+    YYTextLayout * layout = [YYTextLayout layoutWithContainer:container text:text];
+    
+    if (layout.rowCount <= 6) {
+        _shouldShowMoreButton = NO;
+    }else{
+        _shouldShowMoreButton = YES;
     }
     
-    if (_cellHeight == 0)
-    {
-        //计算图片区高度
-        NSInteger imageCount = self.images.count;
-        CGFloat containerH;
-        switch (self.images.count)
-        {
-            case 0:
-            {
-                containerH = 0;
-                break;
-            }
-            case 4:
-            {
-                containerH = (self.imageHeight + 5) * ((imageCount - 1 )/ 2 + 1) + 10;
-                break;
-            }
-            default:
-            {
-                containerH = (self.imageHeight + 5) * ((imageCount - 1 )/ 3 + 1) + 10;
-                break;
-            }
-        }
-        self.imageContainerHeight = containerH;
-        
-        //计算发布内容区高度
-        MLEmojiLabel *emojiLable = [MLEmojiLabel new];
-        emojiLable.numberOfLines = 0;
-        emojiLable.textAlignment = NSTextAlignmentJustified;
-        emojiLable.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
-        emojiLable.font = [UIFont systemFontOfSize:14];
-        emojiLable.isNeedAtAndPoundSign = YES;
-        emojiLable.text = self.content;
-        CGFloat width = kScreenWidth - 70;
-        CGFloat strH = [emojiLable preferredSizeWithMaxWidth:width].height;
-        
-        self.contentHeight = strH;
-
-        
-        //计算评论区高度
-        CGFloat commentHeight = 0;
-        for (int i = 0; i < self.comments.count; i++) {
-            WMCommentModel *commentModel = [self.comments objectAtIndexSafe:i];
-            NSString *nickName = commentModel.nick ? commentModel.nick : (commentModel.username ? commentModel.username : @"");
-            NSString *contentStr = [NSString stringWithFormat:@"%@：%@",nickName,commentModel.content];
-            
-            MLEmojiLabel *emojiContent = [MLEmojiLabel new];
-            emojiContent.numberOfLines = 0;
-            emojiContent.textAlignment = NSTextAlignmentJustified;
-            emojiContent.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
-            emojiContent.font = [UIFont systemFontOfSize:14];
-            emojiContent.isNeedAtAndPoundSign = YES;
-            emojiContent.text = contentStr;
-            
-            CGFloat width = kScreenWidth - 70;
-            CGFloat height = [emojiContent preferredSizeWithMaxWidth:width].height;
-            
-            if (i == self.comments.count - 1) {
-                height = height+5;
-            }
-            
-            if (i == 0) {
-                height = height+5;
-                commentModel.isFirstComment = YES;
-            }
-            
-            commentModel.commentCellHeight = height;
-
-            commentHeight = commentHeight + height;
-        }
-        
-        self.commentHeight = commentHeight;
-        
-        //计算cell高度
-        self.cellHeight = 6 + 46 + self.contentHeight + self.moreButtonHeight + self.imageContainerHeight + self.commentHeight ;
+    return _content;
+}
+- (void)setIsOpening:(BOOL)isOpening
+{
+    if (!_shouldShowMoreButton) {
+        _isOpening = NO;
+    } else {
+        _isOpening = isOpening;
     }
 }
 

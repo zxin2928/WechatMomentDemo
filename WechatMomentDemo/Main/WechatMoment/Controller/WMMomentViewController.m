@@ -11,14 +11,17 @@
 #import "WMMomentModel.h"
 #import "WMMomentRefreshView.h"
 #import "WMMomentHeadView.h"
+#import "WMMomentLayout.h"
 
-@interface WMMomentViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface WMMomentViewController ()<UITableViewDelegate, UITableViewDataSource,WMMomentCellDelegate>
 
 @property (strong, nonatomic) UITableView *momentTable;
 
+@property (strong, nonatomic) WMMomentHeadView *headerView;
+
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
-@property (strong, nonatomic) WMMomentHeadView *headerView;
+@property (strong, nonatomic) NSMutableArray *layoutsArr;
 
 @end
 
@@ -39,13 +42,24 @@
     [self firstAppear];
 }
 
+-(NSMutableArray*)getDataArrayWithDatas:(NSMutableArray*)array{
+    NSMutableArray *layoutArray = [NSMutableArray array];
+    for (int i = 0; i<array.count; i++) {
+        WMMomentModel *momentModel = [array objectAtIndexSafe:i];
+        WMMomentLayout *layout = [[WMMomentLayout alloc]initWithModel:momentModel];
+        [layoutArray addObjectSafe:layout];
+    }
+    return layoutArray;
+}
+
 - (void)firstAppear{
     NSString *personKey = PERSON_FIRST;
     NSString *key = MOMENT_FIRST;
     NSMutableArray *datas = [[WMSql shared]queryMomentWithPage:0];
     if (datas.count > 0) {
         self.dataArray = datas;
-        
+        self.layoutsArr = [self getDataArrayWithDatas:datas];
+
         [self configTableView];
         
         key = MOMENT_HEAD;
@@ -82,6 +96,8 @@
                 [self.dataArray addObjectSafe:model];
             }
         }
+        self.layoutsArr = [self getDataArrayWithDatas:self.dataArray];
+
     }
     [self.momentTable reloadData];
     
@@ -131,7 +147,8 @@
         [WMModelClass momentListWithData:data];
         if ([request.key isEqualToString:MOMENT_FIRST]) {
             self.dataArray = [[WMSql shared]queryMomentWithPage:0];
-            
+            self.layoutsArr = [self getDataArrayWithDatas:self.dataArray];
+
             [self configTableView];
         }
         
@@ -149,25 +166,41 @@
     
 }
 
+#pragma -mark - WMMomentCellDelegate
+-(void)DidClickMoreLessInDynamicsCell:(WMMomentCell *)cell
+{
+    NSIndexPath * indexPath = [self.momentTable indexPathForCell:cell];
+    WMMomentLayout * layout = [self.layoutsArr objectAtIndexSafe:indexPath.row];
+    layout.model.isOpening = !layout.model.isOpening;
+    [layout resetLayout];
+    CGRect cellRect = [self.momentTable rectForRowAtIndexPath:indexPath];
+    
+    [self.momentTable reloadData];
+    
+    if (cellRect.origin.y < self.momentTable.contentOffset.y + 64) {
+        [self.momentTable scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+}
+
 #pragma -mark - UITableViewDelegate and UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.dataArray.count;
+    return self.layoutsArr.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    WMMomentModel *momentModel = [self.dataArray objectAtIndexSafe:indexPath.row];
-    return momentModel.cellHeight;
+    WMMomentLayout *layout = [self.layoutsArr objectAtIndexSafe:indexPath.row];
+    return layout.height;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    WMMomentModel *momentModel = [self.dataArray objectAtIndexSafe:indexPath.row];
-    NSString *identifier = [NSString stringWithFormat:@"WMMomentCell-%zi-%zi",momentModel.images.count,indexPath.row];
-    WMMomentCell *momentCell = [WMMomentCell cellWithTableView:tableView identifier:identifier];
-    momentCell.model = momentModel;
+    WMMomentLayout *layout = [self.layoutsArr objectAtIndexSafe:indexPath.row];
+    WMMomentCell * momentCell = [tableView dequeueReusableCellWithIdentifier:@"WMMomentCell"];
+    momentCell.delegate = self;
+    momentCell.layout = layout;
         
     return momentCell;
 }
@@ -181,6 +214,8 @@
         [_momentTable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view);
         }];
+        [_momentTable registerClass:[WMMomentCell class] forCellReuseIdentifier:@"WMMomentCell"];
+
         _momentTable.delegate = self;
         _momentTable.dataSource = self;
         _momentTable.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -215,5 +250,14 @@
         self.momentTable.tableHeaderView = _headerView;
     }
     return _headerView;
+}
+
+#pragma -mark - layoutsArr
+-(NSMutableArray *)layoutsArr
+{
+    if (!_layoutsArr) {
+        _layoutsArr = [NSMutableArray array];
+    }
+    return _layoutsArr;
 }
 @end

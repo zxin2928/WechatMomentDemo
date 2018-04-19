@@ -64,9 +64,7 @@
             momentModel.comments = commentArray;
             
             
-            [momentModel caculateCellHeight];
-            
-            if (momentModel.content || momentModel.images.count > 0) {
+            if (momentModel.content.length > 0 || momentModel.images.count > 0) {
                 if (momentModel.content.length == 0) {
                     momentModel.content = @"";
                 }

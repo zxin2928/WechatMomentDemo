@@ -8,19 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-@class WMMomentModel;
+@class WMMomentLayout;
+
+@protocol WMMomentCellDelegate;
 
 @interface WMMomentCell : UITableViewCell
 
-@property (strong, nonatomic) WMMomentModel *model;
+@property (strong, nonatomic) WMMomentLayout *layout;
 
-@property (copy ,nonatomic) void (^imageBlock)(NSArray *imageViews, NSInteger index);
-
-@property (copy ,nonatomic) void (^linkBlock)(void);
-
-@property (copy ,nonatomic) void (^iconBlock)(void);
-
-@property (copy ,nonatomic) void (^moreBlock)(BOOL isToOpening);
+@property (weak, nonatomic) id<WMMomentCellDelegate> delegate;
 
 +(instancetype)cellWithTableView:(UITableView*)tableView identifier:(NSString*)identifier;
+
+@end
+
+@protocol WMMomentCellDelegate <NSObject>
+/**
+ 点击了全文/收回
+ 
+ */
+- (void)DidClickMoreLessInDynamicsCell:(WMMomentCell *)cell;
+
 @end

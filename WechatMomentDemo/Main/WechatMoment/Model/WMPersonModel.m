@@ -10,5 +10,9 @@
 #import "WMMomentModel.h"
 
 @implementation WMPersonModel
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    NSLog(@"WMPersonModel找不到Key----------------------------%@",key);
+}
 
 @end

@@ -433,8 +433,6 @@ const NSString * TABLE_COMMENT = @"table_comment";
             [db close];
         }];
         momentModel.comments = commentArray;
-
-        [momentModel caculateCellHeight];
         
         [returnArray addObjectSafe:momentModel];
     }

@@ -45,13 +45,7 @@
 
 -(void)setModel:(WMCommentModel *)model{
     _model = model;    
-    if (_model.isFirstComment) {
-        [_contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.trailing.bottom.equalTo(self);
-            make.leading.equalTo(self).offset(4);
-            make.top.equalTo(self).offset(5);
-        }];
-    }
+
     
     _contentLab.attributedText = [self generateAttributedStringWithCommentModel:_model];
 }

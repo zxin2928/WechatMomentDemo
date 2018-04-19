@@ -12,24 +12,17 @@
 #import "WMMomentModel.h"
 #import "WMCommentTableView.h"
 #import "WMCommentTableViewCell.h"
+#import "WMMomentLayout.h"
 
-@interface WMMomentCell ()<MLEmojiLabelDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface WMMomentCell ()<UITableViewDelegate, UITableViewDataSource>
 
-/**  发布人头像 */
-@property (strong, nonatomic) UIImageView *avatarImageView;
-/** 发布人昵称 */
-@property (strong, nonatomic) UIButton *nicknameButton;
-/** 发布文本内容 */
-@property (strong, nonatomic) MLEmojiLabel *contentLab;
-/** 全文/收起 */
-@property (strong, nonatomic) UIButton *moreButton;
-/** 图片容器 */
-@property (strong, nonatomic) WMMomentImageContainerView *imageContainerView;
-/** 底部分割线 */
-@property (strong, nonatomic) UIView *bottomlineView;
-/** 评论部分 */
-@property (strong, nonatomic) WMCommentTableView *commentTable;
+@property (strong, nonatomic) UIImageView * portrait;
+@property (strong, nonatomic) YYLabel * nameLabel;
+@property (strong, nonatomic) YYLabel * contentLabel;
+@property (strong, nonatomic) UIButton * moreLessDetailBtn;
+@property (strong, nonatomic) WMMomentImageContainerView *picContainerView;
 
+@property (strong, nonatomic) UIView *bottomLineView;
 @end
 
 @implementation WMMomentCell
@@ -38,143 +31,151 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         UIView *view = self.contentView;
         view.backgroundColor = HEX_RGB(white);
         
-        _avatarImageView = [UIImageView new];
-        _avatarImageView.image = [UIImage imageNamed:@"AlbumReflashIcon"];
-        _avatarImageView.backgroundColor = HEX_RGB(white);
-        [view addSubview:_avatarImageView];
-        [_avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(view).offset(10);
-            make.top.equalTo(view).offset(6);
-            make.width.height.mas_equalTo(40);
-        }];
-        
-        _nicknameButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _nicknameButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-        _nicknameButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-        [_nicknameButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        [view addSubview:_nicknameButton];
-        [_nicknameButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self.avatarImageView.mas_trailing).offset(10);
-            make.width.mas_lessThanOrEqualTo(kScreenWidth - 15 - 40);
-            make.top.equalTo(self.avatarImageView);
-            make.height.mas_equalTo(18);
-        }];
-        
-        _contentLab = [MLEmojiLabel new];
-        _contentLab.textColor = HEX_RGB(black);
-        _contentLab.numberOfLines = 0;
-        _contentLab.textAlignment = NSTextAlignmentJustified;
-        _contentLab.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
-        _contentLab.font = [UIFont systemFontOfSize:14];
-        _contentLab.backgroundColor = [UIColor clearColor];
-        _contentLab.isNeedAtAndPoundSign = YES;
-        _contentLab.delegate = self;
-        [view addSubview:_contentLab];
- 
-        
-        _moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _moreButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-        [_moreButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        _moreButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-        [_moreButton addTarget:self action:@selector(clickMoreButton:) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:_moreButton];
-        
-        _imageContainerView = [[WMMomentImageContainerView alloc]init];
-        [view addSubview:_imageContainerView];
-        
-        _bottomlineView = [UIView new];
-        _bottomlineView.backgroundColor = [UIColor lightGrayColor];
-        [view addSubview:_bottomlineView];
-        [_bottomlineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.trailing.bottom.equalTo(view);
-            make.height.mas_equalTo(0.5);
-        }];
-        
-        _commentTable = [[WMCommentTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        [view addSubview:_commentTable];
+        [view addSubview:self.portrait];
+        [view addSubview:self.nameLabel];
+        [view addSubview:self.contentLabel];
+        [view addSubview:self.moreLessDetailBtn];
+        [view addSubview:self.picContainerView];
+        [view addSubview:self.bottomLineView];
 
-        _commentTable.delegate = self;
-        _commentTable.dataSource = self;
-        _commentTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _commentTable.scrollsToTop = NO;
-        _commentTable.showsHorizontalScrollIndicator = NO ;
-        _commentTable.showsVerticalScrollIndicator = NO ;
-        
-        if (@available(iOS 11.0, *)) {
-            _commentTable.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-            _commentTable.estimatedRowHeight = 0;
-            _commentTable.estimatedSectionFooterHeight = 0;
-            _commentTable.estimatedSectionHeaderHeight = 0;
-        }
-        _commentTable.scrollIndicatorInsets = _commentTable.contentInset;
     }
     return self;
 }
 
--(void)setModel:(WMMomentModel *)model{
-    _model = model;
-    
-    NSString *nickName = _model.nick ? _model.nick : (_model.username ? _model.username : @"");
-    
-    [_nicknameButton setTitle:nickName forState:UIControlStateNormal];
-    
-    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"AlbumReflashIcon"]];
-
-    
-    _contentLab.text = _model.content;
-    
-    _imageContainerView.imageWidth = _model.imageWidth;
-    _imageContainerView.imageHeight = _model.imageHeight;
-    _imageContainerView.imageUrls = _model.images;
-    _imageContainerView.imageBlock = _imageBlock;
-    
-    
-    [_contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.nicknameButton);
-        make.trailing.equalTo(self).offset(-15);
-        make.top.equalTo(self.nicknameButton.mas_bottom).offset(8);
-    }];
-    
-    [_moreButton setTitle:@"" forState:UIControlStateNormal];
-    [_moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.avatarImageView.mas_trailing).offset(10);
-        make.width.mas_lessThanOrEqualTo(kScreenWidth - 15 - 40);
-        make.top.equalTo(self.contentLab.mas_bottom);
-        make.height.mas_equalTo(1);
-    }];
-    
-    [_imageContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.nicknameButton);
-        make.trailing.equalTo(self).offset(-10);
-        make.top.equalTo(self.moreButton.mas_bottom).offset(10);
-        make.height.mas_equalTo(self.model.imageContainerHeight);
-    }];
-
-    
-    [_commentTable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.imageContainerView.mas_bottom).offset(-5);
-        make.leading.equalTo(self.nicknameButton);
-        make.trailing.equalTo(self).offset(-10);
-        make.height.mas_equalTo(self.model.commentHeight);
-    }];
-    
-
-}
-
-- (void)clickMoreButton:(UIButton*)button{
-
-}
-
-#pragma -mark - MLEmojiLabelDelegate
-- (void)mlEmojiLabel:(MLEmojiLabel*)emojiLabel didSelectLink:(NSString*)link withType:(MLEmojiLabelLinkType)type
+-(void)setLayout:(WMMomentLayout *)layout
 {
-    if (self.linkBlock)
-    {
-        self.linkBlock();
+    UIView * lastView;
+    _layout = layout;
+    WMMomentModel * model = layout.model;
+    
+    //头像
+    _portrait.left = kDynamicsNormalPadding;
+    _portrait.top = kDynamicsNormalPadding;
+    _portrait.size = CGSizeMake(kDynamicsPortraitWidthAndHeight, kDynamicsPortraitWidthAndHeight);
+    [_portrait sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
+    
+    //昵称
+    _nameLabel.text = model.nick;
+    _nameLabel.top = kDynamicsNormalPadding;
+    _nameLabel.left = _portrait.right + kDynamicsPortraitNamePadding;
+    CGSize nameSize = [_nameLabel sizeThatFits:CGSizeZero];
+    _nameLabel.width = nameSize.width;
+    _nameLabel.height = kDynamicsNameHeight;
+    
+    
+    //动态
+    _contentLabel.left = _nameLabel.left;
+    _contentLabel.top = _nameLabel.bottom + kDynamicsNameDetailPadding;
+    _contentLabel.width = kScreenWidth - kDynamicsNormalPadding * 2 - kDynamicsPortraitNamePadding - kDynamicsPortraitWidthAndHeight;
+    _contentLabel.height = layout.detailLayout.textBoundingSize.height;
+    _contentLabel.textLayout = layout.detailLayout;
+    lastView = _contentLabel;
+    
+    //展开/收起按钮
+    _moreLessDetailBtn.left = _nameLabel.left;
+    _moreLessDetailBtn.top = _contentLabel.bottom + kDynamicsNameDetailPadding;
+    _moreLessDetailBtn.height = kDynamicsMoreLessButtonHeight;
+    [_moreLessDetailBtn sizeToFit];
+    
+    if (model.shouldShowMoreButton) {
+        _moreLessDetailBtn.hidden = NO;
+        
+        if (model.isOpening) {
+            [_moreLessDetailBtn setTitle:@"收起" forState:UIControlStateNormal];
+        }else{
+            [_moreLessDetailBtn setTitle:@"全文" forState:UIControlStateNormal];
+        }
+        
+        lastView = _moreLessDetailBtn;
+    }else{
+        _moreLessDetailBtn.hidden = YES;
     }
+    //图片集
+    if (model.images.count != 0) {
+        _picContainerView.hidden = NO;
+        
+        _picContainerView.left = _nameLabel.left;
+        _picContainerView.top = lastView.bottom + kDynamicsNameDetailPadding;
+        _picContainerView.width = layout.photoContainerSize.width;
+        _picContainerView.height = layout.photoContainerSize.height;
+        _picContainerView.picPathStringsArray = model.images;
+        
+        lastView = _picContainerView;
+    }else{
+        _picContainerView.hidden = YES;
+    }
+    
+}
+
+-(void)clickMorelessDetailButton:(UIButton*)button{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(DidClickMoreLessInDynamicsCell:)]) {
+        [self.delegate DidClickMoreLessInDynamicsCell:self];
+    }
+}
+
+#pragma mark - getter
+-(UIImageView *)portrait
+{
+    if(!_portrait){
+        _portrait = [UIImageView new];
+        _portrait.userInteractionEnabled = YES;
+        _portrait.backgroundColor = [UIColor grayColor];
+    }
+    return _portrait;
+}
+
+-(YYLabel *)nameLabel
+{
+    if (!_nameLabel) {
+        _nameLabel = [YYLabel new];
+        _nameLabel.font = [UIFont systemFontOfSize:15];
+        _nameLabel.textColor = [UIColor blueColor];
+    }
+    return _nameLabel;
+}
+
+-(YYLabel *)contentLabel
+{
+    if (!_contentLabel) {
+        _contentLabel = [YYLabel new];
+        _contentLabel.textAlignment = NSTextAlignmentJustified;
+
+    }
+    return _contentLabel;
+}
+-(UIButton *)moreLessDetailBtn
+{
+    if (!_moreLessDetailBtn) {
+        _moreLessDetailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _moreLessDetailBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_moreLessDetailBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        _moreLessDetailBtn.hidden = YES;
+        [_moreLessDetailBtn addTarget:self action:@selector(clickMorelessDetailButton:) forControlEvents:UIControlEventTouchUpInside];
+
+    }
+    return _moreLessDetailBtn;
+}
+-(WMMomentImageContainerView *)picContainerView
+{
+    if (!_picContainerView) {
+        _picContainerView = [WMMomentImageContainerView new];
+        _picContainerView.hidden = YES;
+    }
+    return _picContainerView;
+}
+
+-(UIView *)bottomLineView{
+    if (_bottomLineView == nil) {
+        _bottomLineView = [UIView new];
+        _bottomLineView.backgroundColor = [UIColor lightGrayColor];
+        _bottomLineView.alpha = 0.3;
+    }
+    return _bottomLineView;
 }
 
 +(instancetype)cellWithTableView:(UITableView*)tableView identifier:(NSString*)identifier
@@ -194,16 +195,12 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _model.comments.count;
+    return _layout.model.comments.count;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    WMCommentModel *commentModel = [self.model.comments objectAtIndexSafe:indexPath.row];
-    return commentModel.commentCellHeight;
-}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    WMCommentModel *commentModel = [self.model.comments objectAtIndexSafe:indexPath.row];
+    WMCommentModel *commentModel = [self.layout.model.comments objectAtIndexSafe:indexPath.row];
     WMCommentTableViewCell *commentCell = [WMCommentTableViewCell cellWithTableView:tableView identifier:@"WMCommentTableViewCell"];
     commentCell.model = commentModel;
     return commentCell;

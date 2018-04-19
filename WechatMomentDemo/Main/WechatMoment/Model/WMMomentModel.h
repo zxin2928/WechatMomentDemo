@@ -39,9 +39,6 @@
 
 @property (assign, nonatomic) int commentId;
 @property (assign, nonatomic) int momentId;
-//每条评论cell的高度
-@property (assign, nonatomic) CGFloat commentCellHeight;
-@property (assign, nonatomic) BOOL isFirstComment;
 
 @end
 
@@ -57,19 +54,8 @@
 
 @property (assign, nonatomic) int momentId;
 
-@property (assign, nonatomic) CGFloat contentHeight;
-
-@property (assign, nonatomic) CGFloat moreButtonHeight;
-
-@property (assign, nonatomic) CGFloat imageWidth;
-@property (assign, nonatomic) CGFloat imageHeight;
-@property (assign, nonatomic) CGFloat imageContainerHeight;
-
-@property (assign, nonatomic) CGFloat commentHeight;
-
-@property (assign, nonatomic) CGFloat cellHeight;
-
-- (void)caculateCellHeight;
+@property (nonatomic, assign) BOOL isOpening;//已展开文字
+@property (nonatomic, assign, readonly) BOOL shouldShowMoreButton;//应该显示"全文"
 
 @end
 

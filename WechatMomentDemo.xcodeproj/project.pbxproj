@@ -40,6 +40,7 @@
 		DCB676B920878B8900000120 /* WMMomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676B620878B8900000120 /* WMMomentCell.m */; };
 		DCB676BA20878B8900000120 /* WMMomentImageContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676B820878B8900000120 /* WMMomentImageContainerView.m */; };
 		DCB676BD2088126900000120 /* WMPersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676BC2088126900000120 /* WMPersonModel.m */; };
+		DCB676FF208879C900000120 /* WMMomentLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676FE208879C900000120 /* WMMomentLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,8 @@
 		DCB676B820878B8900000120 /* WMMomentImageContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMMomentImageContainerView.m; sourceTree = "<group>"; };
 		DCB676BB2088126900000120 /* WMPersonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMPersonModel.h; sourceTree = "<group>"; };
 		DCB676BC2088126900000120 /* WMPersonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMPersonModel.m; sourceTree = "<group>"; };
+		DCB676FD208879C900000120 /* WMMomentLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMMomentLayout.h; sourceTree = "<group>"; };
+		DCB676FE208879C900000120 /* WMMomentLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMMomentLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,6 +388,8 @@
 				DCB6767A2084FA9200000120 /* WMMomentModel.m */,
 				DCB676BB2088126900000120 /* WMPersonModel.h */,
 				DCB676BC2088126900000120 /* WMPersonModel.m */,
+				DCB676FD208879C900000120 /* WMMomentLayout.h */,
+				DCB676FE208879C900000120 /* WMMomentLayout.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -654,6 +659,7 @@
 				DCB676B420878B7A00000120 /* WMCommentTableViewCell.m in Sources */,
 				DCB676BD2088126900000120 /* WMPersonModel.m in Sources */,
 				DCB6764B2084D46000000120 /* WMNavigationController.m in Sources */,
+				DCB676FF208879C900000120 /* WMMomentLayout.m in Sources */,
 				DCB6769E20862B4000000120 /* WMMomentHeadView.m in Sources */,
 				DCB6769B20862A6B00000120 /* WMMomentRefreshView.m in Sources */,
 				DCB676612084DA0300000120 /* WMDiscoverViewController.m in Sources */,

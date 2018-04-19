@@ -10,14 +10,11 @@
 
 @interface WMMomentImageContainerView : UIView
 
-@property (strong, nonatomic) NSArray *imageUrls;
+@property (nonatomic, strong) NSArray *picPathStringsArray;
 
-@property (strong, nonatomic) NSMutableArray *imageViews;
+@property (nonatomic, strong) UIViewController * superView;
+@property (nonatomic, assign) int customImgWidth;
 
-@property (assign, nonatomic) CGFloat imageWidth;
-
-@property (assign, nonatomic) CGFloat imageHeight;
-
-@property (copy ,nonatomic) void (^imageBlock)(NSArray *imageViews, NSInteger index);
++ (CGSize)getContainerSizeWithPicPathStringsArray:(NSArray *)picPathStringsArray;
 
 @end
