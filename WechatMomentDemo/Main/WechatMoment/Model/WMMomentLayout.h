@@ -37,9 +37,7 @@ typedef void(^ClickPhoneNumBlock)(NSString * phoneNum);
 @property(nonatomic,assign)CGSize photoContainerSize;
 @property(nonatomic,strong)YYTextLayout * thumbLayout;
 @property(nonatomic,strong)NSMutableArray * commentLayoutArr;
-@property(nonatomic,assign)CGFloat thumbHeight;
 @property(nonatomic,assign)CGFloat commentHeight;
-@property(nonatomic,assign)CGFloat thumbCommentHeight;
 
 @property(nonatomic,copy)ClickUserBlock clickUserBlock;
 @property(nonatomic,copy)ClickUrlBlock clickUrlBlock;

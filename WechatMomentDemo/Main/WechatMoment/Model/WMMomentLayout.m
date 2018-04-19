@@ -24,7 +24,6 @@
 - (void)resetLayout
 {
     _height = 0;
-    _thumbCommentHeight = 0;
     
     [self.commentLayoutArr removeAllObjects];
     
@@ -49,7 +48,11 @@
     _height += kDynamicsNameHeight;//时间
     _height += kDynamicsPortraitNamePadding;
     
-
+    if (_model.comments.count != 0) {
+        [self layoutComment];
+    }
+    _height += _commentHeight;
+    
 }
 
 - (void)layoutDetail
@@ -102,6 +105,81 @@
 {
     self.photoContainerSize = CGSizeZero;
     self.photoContainerSize = [WMMomentImageContainerView getContainerSizeWithPicPathStringsArray:_model.images];
+}
+
+- (void)layoutComment
+{
+    _commentHeight = 10;
+    
+    for (int i = 0; i < _model.comments.count; i++) {
+        WMCommentModel * model = _model.comments[i];
+        
+        NSMutableAttributedString * text = [[NSMutableAttributedString alloc] init];
+        
+        NSMutableAttributedString * nick = [[NSMutableAttributedString alloc] initWithString:model.nick];
+        nick.font = [UIFont boldSystemFontOfSize:13];
+        YYTextHighlight * highLight = [YYTextHighlight new];
+        [nick setColor:[UIColor colorWithRed:69/255.0 green:88/255.0 blue:133/255.0 alpha:1] range:nick.rangeOfAll];
+        WS(weakSelf);
+        highLight.tapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+        };
+        [nick setTextHighlight:highLight range:nick.rangeOfAll];
+        [text appendAttributedString:nick];
+        
+        NSMutableAttributedString * fhText = [[NSMutableAttributedString alloc] initWithString:@"："];
+        fhText.font = [UIFont systemFontOfSize:13];
+        [text appendAttributedString:fhText];
+        NSMutableAttributedString * message = [[NSMutableAttributedString alloc] initWithString:model.content];
+        message.font = [UIFont systemFontOfSize:13];
+        [text appendAttributedString:message];
+        
+        //添加网址电话识别
+        NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypePhoneNumber | NSTextCheckingTypeLink error:nil];
+        [detector enumerateMatchesInString:text.string
+                                   options:kNilOptions
+                                     range:text.rangeOfAll
+                                usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                                    
+                                    if (result.URL) {
+                                        YYTextHighlight * highLight = [YYTextHighlight new];
+                                        [text setColor:[UIColor colorWithRed:69/255.0 green:88/255.0 blue:133/255.0 alpha:1] range:result.range];
+                                        highLight.tapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+                                            if (weakSelf.clickUrlBlock) {
+                                                weakSelf.clickUrlBlock([text.string substringWithRange:range]);
+                                            }
+                                        };
+                                        [text setTextHighlight:highLight range:result.range];
+                                    }
+                                    if (result.phoneNumber) {
+                                        YYTextHighlight * highLight = [YYTextHighlight new];
+                                        [text setColor:[UIColor colorWithRed:69/255.0 green:88/255.0 blue:133/255.0 alpha:1] range:result.range];
+                                        highLight.tapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+                                            if (weakSelf.clickPhoneNumBlock) {
+                                                weakSelf.clickPhoneNumBlock([text.string substringWithRange:range]);
+                                            }
+                                        };
+                                        [text setTextHighlight:highLight range:result.range];
+                                    }
+                                }];
+        
+        YYTextContainer * container = [YYTextContainer containerWithSize:CGSizeMake(kScreenWidth - kDynamicsNormalPadding - kDynamicsPortraitWidthAndHeight - kDynamicsPortraitNamePadding - kDynamicsNameDetailPadding*2 - kDynamicsNormalPadding,CGFLOAT_MAX)];
+        
+        YYTextLayout * layout = [YYTextLayout layoutWithContainer:container text:text];
+        _commentHeight += kDynamicsGrayPicPadding;//评论文字上边距
+        _commentHeight += layout.textBoundingSize.height;//评论文字高度
+        _commentHeight += kDynamicsGrayPicPadding;//评论文字下边距
+        [self.commentLayoutArr addObject:layout];
+        
+    }
+    
+}
+
+-(NSMutableArray *)commentLayoutArr
+{
+    if (!_commentLayoutArr) {
+        _commentLayoutArr = [NSMutableArray array];
+    }
+    return _commentLayoutArr;
 }
 
 @end

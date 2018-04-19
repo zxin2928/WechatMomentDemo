@@ -44,7 +44,9 @@
                 WMImageModel *imageModel = [WMImageModel modelWithJSON:[momentModel.images objectAtIndexSafe:j]];
                 imageModel.momentId = momentModel.momentId;
                 imageModel.imageId = (i+1)*10+j;
-                [[WMSql shared]insertMomentImage:imageModel];
+                if (momentModel.images.count > 0) {
+                    [[WMSql shared]insertMomentImage:imageModel];
+                }
                 [imageArray addObjectSafe:imageModel];
             }
             momentModel.images = imageArray;
@@ -58,7 +60,9 @@
                 commentModel.nick = commentModel.sender.nick;
                 commentModel.commentId = (i+1)*10+k;
                 commentModel.momentId = momentModel.momentId;
-                [[WMSql shared]insertMomentComent:commentModel];
+                if (momentModel.comments.count > 0) {
+                    [[WMSql shared]insertMomentComent:commentModel];
+                }
                 [commentArray addObjectSafe:commentModel];
             }
             momentModel.comments = commentArray;

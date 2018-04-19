@@ -11,7 +11,7 @@
 #import "WMMomentImageContainerView.h"
 #import "WMMomentModel.h"
 #import "WMCommentTableView.h"
-#import "WMCommentTableViewCell.h"
+#import "WMCommentView.h"
 #import "WMMomentLayout.h"
 
 @interface WMMomentCell ()<UITableViewDelegate, UITableViewDataSource>
@@ -21,8 +21,9 @@
 @property (strong, nonatomic) YYLabel * contentLabel;
 @property (strong, nonatomic) UIButton * moreLessDetailBtn;
 @property (strong, nonatomic) WMMomentImageContainerView *picContainerView;
-
+@property (strong, nonatomic) WMCommentView *commentView;
 @property (strong, nonatomic) UIView *bottomLineView;
+@property (strong, nonatomic) UILabel *dateLabel;
 @end
 
 @implementation WMMomentCell
@@ -41,6 +42,7 @@
         [view addSubview:self.contentLabel];
         [view addSubview:self.moreLessDetailBtn];
         [view addSubview:self.picContainerView];
+        [view addSubview:self.commentView];
         [view addSubview:self.bottomLineView];
 
     }
@@ -110,6 +112,18 @@
         _picContainerView.hidden = YES;
     }
     
+    //评论
+    if (model.comments.count != 0) {
+        _commentView.hidden = NO;
+        _commentView.left = _contentLabel.left;
+        _commentView.top = lastView.bottom + kDynamicsPortraitNamePadding;
+        _commentView.width = _contentLabel.width;
+        _commentView.height = layout.commentHeight;
+        
+        [_commentView setCommentArr:model.comments WMMomentLayout:layout];
+    }else{
+        _commentView.hidden = YES;
+    }
 }
 
 -(void)clickMorelessDetailButton:(UIButton*)button{
@@ -178,6 +192,15 @@
     return _bottomLineView;
 }
 
+-(WMCommentView *)commentView
+{
+    if (!_commentView) {
+        _commentView = [WMCommentView new];
+        _commentView.cell = self;
+    }
+    return _commentView;
+}
+
 +(instancetype)cellWithTableView:(UITableView*)tableView identifier:(NSString*)identifier
 {
     WMMomentCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -198,12 +221,5 @@
     return _layout.model.comments.count;
 }
 
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    WMCommentModel *commentModel = [self.layout.model.comments objectAtIndexSafe:indexPath.row];
-    WMCommentTableViewCell *commentCell = [WMCommentTableViewCell cellWithTableView:tableView identifier:@"WMCommentTableViewCell"];
-    commentCell.model = commentModel;
-    return commentCell;
-}
 
 @end

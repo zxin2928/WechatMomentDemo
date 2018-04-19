@@ -39,6 +39,23 @@
     NSLog(@"WMMomentModel找不到Key----------------------------%@",key);
 }
 
+-(BOOL)isEqual:(id)object{
+    if (self == object) {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[WMMomentModel class]]) {
+        return NO;
+    }
+    
+    WMMomentModel *model = (WMMomentModel *)object;
+    if (model.momentId == self.momentId) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 -(NSString *)content
 {
     if (_content == nil) {

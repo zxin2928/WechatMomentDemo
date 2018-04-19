@@ -432,7 +432,7 @@ const NSString * TABLE_COMMENT = @"table_comment";
             }
             [db close];
         }];
-        momentModel.comments = commentArray;
+        momentModel.comments = [NSMutableArray arrayWithArray:commentArray];
         
         [returnArray addObjectSafe:momentModel];
     }
