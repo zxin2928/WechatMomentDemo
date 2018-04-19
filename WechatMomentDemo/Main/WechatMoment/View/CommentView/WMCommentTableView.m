@@ -12,7 +12,7 @@
 #define kPopupTriangleHeigh 5
 #define kPopupTriangleWidth 6
 #define kPopupTriangleTopPointX 3 * (self.frame.size.width - kPopupTriangleWidth)/20.0f
-#define kBorderOffset       0//0.5f
+#define kBorderOffset       0
 
 @implementation WMCommentTableView
 

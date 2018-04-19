@@ -10,7 +10,7 @@
 
 static const CGFloat criticalY = -60.f;
 
-#define kSDTimeLineRefreshHeaderRotateAnimationKey @"RotateAnimationKey"
+#define kWMTimeLineRefreshHeaderRotateAnimationKey @"RotateAnimationKey"
 
 @implementation WMMomentRefreshView
 {
@@ -44,17 +44,17 @@ static const CGFloat criticalY = -60.f;
 }
 
 
-- (void)setRefreshState:(SDWXRefreshViewState)refreshState
+- (void)setRefreshState:(WMRefreshViewState)refreshState
 {
     [super setRefreshState:refreshState];
     
-    if (refreshState == SDWXRefreshViewStateRefreshing) {
+    if (refreshState == WMRefreshViewStateRefreshing) {
         if (self.refreshingBlock) {
             self.refreshingBlock();
         }
-        [self.layer addAnimation:_rotateAnimation forKey:kSDTimeLineRefreshHeaderRotateAnimationKey];
-    } else if (refreshState == SDWXRefreshViewStateNormal) {
-        [self.layer removeAnimationForKey:kSDTimeLineRefreshHeaderRotateAnimationKey];
+        [self.layer addAnimation:_rotateAnimation forKey:kWMTimeLineRefreshHeaderRotateAnimationKey];
+    } else if (refreshState == WMRefreshViewStateNormal) {
+        [self.layer removeAnimationForKey:kWMTimeLineRefreshHeaderRotateAnimationKey];
         [UIView animateWithDuration:0.3 animations:^{
             self.transform = CGAffineTransformIdentity;
         }];
@@ -70,14 +70,14 @@ static const CGFloat criticalY = -60.f;
     if (y < criticalY) {
         y = criticalY;
         
-        if (self.scrollView.isDragging && self.refreshState != SDWXRefreshViewStateWillRefresh) {
-            self.refreshState = SDWXRefreshViewStateWillRefresh;
-        } else if (!self.scrollView.isDragging && self.refreshState == SDWXRefreshViewStateWillRefresh) {
-            self.refreshState = SDWXRefreshViewStateRefreshing;
+        if (self.scrollView.isDragging && self.refreshState != WMRefreshViewStateWillRefresh) {
+            self.refreshState = WMRefreshViewStateWillRefresh;
+        } else if (!self.scrollView.isDragging && self.refreshState == WMRefreshViewStateWillRefresh) {
+            self.refreshState = WMRefreshViewStateRefreshing;
         }
     }
     
-    if (self.refreshState == SDWXRefreshViewStateRefreshing) return;
+    if (self.refreshState == WMRefreshViewStateRefreshing) return;
     
     CGAffineTransform transform = CGAffineTransformIdentity;
     transform = CGAffineTransformTranslate(transform, 0, -y);
@@ -89,7 +89,7 @@ static const CGFloat criticalY = -60.f;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
-    if (keyPath != kSDBaseRefreshViewObserveKeyPath) return;
+    if (keyPath != kWMBaseRefreshViewObserveKeyPath) return;
     
     [self updateRefreshHeaderWithOffsetY:self.scrollView.contentOffset.y];
 }

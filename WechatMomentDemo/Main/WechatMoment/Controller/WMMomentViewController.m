@@ -49,6 +49,8 @@
         [self configTableView];
         
         key = MOMENT_HEAD;
+        
+        [_refreshHeader beginRefreshing];
     }else{
         key = MOMENT_FIRST;
     }
@@ -113,9 +115,8 @@
         WS(weakSelf);
         __weak typeof(_refreshHeader) weakHeader = _refreshHeader;
         [_refreshHeader setRefreshingBlock:^{
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [weakHeader endRefreshing];
-            });
+            [weakSelf requestMomentWithKey:MOMENT_HEAD];
+
         }];
         [self.momentTable.superview addSubview:_refreshHeader];
     } else {
@@ -128,6 +129,7 @@
 -(void)requestSuccess:(WMRequest *)request data:(id)data url:(NSString *)url{
 
     if ([request.key isEqualToString:MOMENT_FIRST] || [request.key isEqualToString:MOMENT_HEAD]) {
+        [_refreshHeader endRefreshing];
         [WMModelClass momentListWithData:data];
         if ([request.key isEqualToString:MOMENT_FIRST]) {
             self.dataArray = [[WMSql shared]queryMomentWithPage:0];

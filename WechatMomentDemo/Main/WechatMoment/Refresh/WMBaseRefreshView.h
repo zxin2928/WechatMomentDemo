@@ -8,21 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-UIKIT_EXTERN NSString *const kSDBaseRefreshViewObserveKeyPath;
+UIKIT_EXTERN NSString *const kWMBaseRefreshViewObserveKeyPath;
 
 typedef enum {
-    SDWXRefreshViewStateNormal,
-    SDWXRefreshViewStateWillRefresh,
-    SDWXRefreshViewStateRefreshing,
-} SDWXRefreshViewState;
+    WMRefreshViewStateNormal,
+    WMRefreshViewStateWillRefresh,
+    WMRefreshViewStateRefreshing,
+} WMRefreshViewState;
 
 @interface WMBaseRefreshView : UIView
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
+-(void)beginRefreshing;
 - (void)endRefreshing;
 
 @property (nonatomic, assign) UIEdgeInsets scrollViewOriginalInsets;
-@property (nonatomic, assign) SDWXRefreshViewState refreshState;
+@property (nonatomic, assign) WMRefreshViewState refreshState;
 
 @end

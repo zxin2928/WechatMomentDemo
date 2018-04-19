@@ -42,7 +42,7 @@
         view.backgroundColor = HEX_RGB(white);
         
         _avatarImageView = [UIImageView new];
-        _avatarImageView.backgroundColor = HEX_RGB(black);
+        _avatarImageView.backgroundColor = HEX_RGB(white);
         [view addSubview:_avatarImageView];
         [_avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(view).offset(10);
