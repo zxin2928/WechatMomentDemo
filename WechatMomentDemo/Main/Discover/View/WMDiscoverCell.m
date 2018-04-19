@@ -10,6 +10,7 @@
 #import "WMCommon.h"
 
 @interface WMDiscoverCell()
+@property (strong, nonatomic) UIImageView *momentImageView;
 @property (strong, nonatomic) UILabel *titleLab;
 
 @end
@@ -24,16 +25,25 @@
         
         view.backgroundColor = HEX_RGB(white);
         
+        _momentImageView = [UIImageView new];
+        _momentImageView.image = [UIImage imageNamed:@"AlbumReflashIcon"];
+        [view addSubview:_momentImageView];
+        [_momentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(view).offset(14);
+            make.width.height.mas_equalTo(40);
+            make.centerY.equalTo(view);
+        }];
+        
         _titleLab = [UILabel new];
         _titleLab.font = [UIFont systemFontOfSize:15];
         _titleLab.textColor = HEX_RGB(black);
         _titleLab.numberOfLines = 2;
         [view addSubview:_titleLab];
         [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(view.mas_leading).offset(14);
+            make.leading.equalTo(self.momentImageView.mas_trailing).offset(14);
             make.trailing.equalTo(view).offset(-10);
-            make.top.equalTo(view).offset(18);
-            make.height.mas_lessThanOrEqualTo(46);
+            make.centerY.equalTo(view);
+            make.height.mas_lessThanOrEqualTo(44);
         }];
     }
     return self;

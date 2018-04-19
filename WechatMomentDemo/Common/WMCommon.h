@@ -39,7 +39,7 @@
 
 #define SYSTERM_VERTION [[UIDevice currentDevice] systemVersion]
 
-#define COLOR_NAVIGATION    0xF05858     //状态栏、导航栏
+#define COLOR_NAVIGATION    0x393A3E     //导航栏
 #define COLOR_BACKGROUND    0xf6f6f6    //背景颜色
 #define white        0xffffff
 #define black        0x111111

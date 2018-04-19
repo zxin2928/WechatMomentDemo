@@ -156,7 +156,7 @@
     if(!_portrait){
         _portrait = [UIImageView new];
         _portrait.userInteractionEnabled = YES;
-        _portrait.backgroundColor = [UIColor grayColor];
+        _portrait.backgroundColor = HEX_RGB(COLOR_BACKGROUND);
     }
     return _portrait;
 }

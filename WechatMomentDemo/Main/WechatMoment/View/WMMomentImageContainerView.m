@@ -38,7 +38,7 @@
         imageView.tag = i;
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
-        imageView.backgroundColor = [UIColor grayColor];
+        imageView.backgroundColor = HEX_RGB(COLOR_BACKGROUND);
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageView:)];
         [imageView addGestureRecognizer:tap];
         [temp addObject:imageView];
@@ -72,13 +72,14 @@
     long perRowItemCount = [self perRowItemCountForPicPathArray:_picPathStringsArray];
     CGFloat margin = 5;
     
+    WS(weakSelf);
     [_picPathStringsArray enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         long columnIndex = idx % perRowItemCount;
         long rowIndex = idx / perRowItemCount;
-        UIImageView *imageView = [_imageViewsArray objectAtIndex:idx];
+        UIImageView *imageView = [weakSelf.imageViewsArray objectAtIndex:idx];
         imageView.hidden = NO;
-        
-        WMImageModel *imageModel = [_picPathStringsArray objectAtIndexSafe:idx];
+        imageView.image = [UIImage imageNamed:@"AlbumReflashIcon"];
+        WMImageModel *imageModel = [weakSelf.picPathStringsArray objectAtIndexSafe:idx];
         [imageView downloadImageWithURL:imageModel.url];
                 
         imageView.frame = CGRectMake(columnIndex * (itemW + margin), rowIndex * (itemH + margin), itemW, itemH);
