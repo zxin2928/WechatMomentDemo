@@ -8,17 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "WMCommon.h"
+
 #define kDynamicsNormalPadding 15
 #define kDynamicsPortraitWidthAndHeight 45
 #define kDynamicsPortraitNamePadding 10
 #define kDynamicsNameDetailPadding 8
 #define kDynamicsNameHeight 17
 #define kDynamicsMoreLessButtonHeight 30
-#define kDynamicsSpreadButtonHeight 20
-#define kDynamicsGrayBgHeight 51
-#define kDynamicsGrayPicHeight 45
 #define kDynamicsGrayPicPadding 3
-#define kDynamicsThumbTopPadding 10
 
 
 #define kDynamicsLineSpacing 5

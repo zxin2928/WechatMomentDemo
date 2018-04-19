@@ -11,7 +11,6 @@
 @class WMMomentModel;
 @class WMMomentLayout;
 @class WMMomentCell;
-@class WMCommentTableView;
 
 @interface WMCommentView : UIView
 @property(nonatomic,strong)NSMutableArray * commentArray;

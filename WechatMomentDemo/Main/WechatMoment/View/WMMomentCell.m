@@ -10,9 +10,9 @@
 #import "WMCommon.h"
 #import "WMMomentImageContainerView.h"
 #import "WMMomentModel.h"
-#import "WMCommentTableView.h"
 #import "WMCommentView.h"
 #import "WMMomentLayout.h"
+#import "UIImageView+Download.h"
 
 @interface WMMomentCell ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -23,7 +23,7 @@
 @property (strong, nonatomic) WMMomentImageContainerView *picContainerView;
 @property (strong, nonatomic) WMCommentView *commentView;
 @property (strong, nonatomic) UIView *bottomLineView;
-@property (strong, nonatomic) UILabel *dateLabel;
+@property (strong, nonatomic) CAShapeLayer *lineLayer;
 @end
 
 @implementation WMMomentCell
@@ -49,6 +49,22 @@
     return self;
 }
 
+-(void)drawRect:(CGRect)rect{
+    [super drawRect:rect];
+    
+    [self.layer addSublayer:self.lineLayer];
+    self.lineLayer.lineWidth = 0.3;
+    self.lineLayer.strokeColor = [UIColor lightGrayColor].CGColor;
+    self.lineLayer.frame = CGRectMake(0, 0, kScreenWidth, 0.3);
+    
+    UIBezierPath *linePath = [UIBezierPath bezierPath];
+    [linePath moveToPoint:CGPointMake(0, self.contentView.frame.size.height - 0.3)];
+    [linePath addLineToPoint:CGPointMake(kScreenWidth, self.contentView.frame.size.height - 0.3)];
+    
+    self.lineLayer.strokeEnd = 1.0;
+    self.lineLayer.path = linePath.CGPath;
+}
+
 -(void)setLayout:(WMMomentLayout *)layout
 {
     UIView * lastView;
@@ -59,7 +75,8 @@
     _portrait.left = kDynamicsNormalPadding;
     _portrait.top = kDynamicsNormalPadding;
     _portrait.size = CGSizeMake(kDynamicsPortraitWidthAndHeight, kDynamicsPortraitWidthAndHeight);
-    [_portrait sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
+    
+    [_portrait downloadImageWithURL:model.avatar];
     
     //昵称
     _nameLabel.text = model.nick;
@@ -124,6 +141,7 @@
     }else{
         _commentView.hidden = YES;
     }
+    
 }
 
 -(void)clickMorelessDetailButton:(UIButton*)button{
@@ -199,6 +217,14 @@
         _commentView.cell = self;
     }
     return _commentView;
+}
+
+-(CAShapeLayer*)lineLayer
+{
+    if (_lineLayer == nil) {
+        _lineLayer = [CAShapeLayer layer];
+    }
+    return _lineLayer;
 }
 
 +(instancetype)cellWithTableView:(UITableView*)tableView identifier:(NSString*)identifier

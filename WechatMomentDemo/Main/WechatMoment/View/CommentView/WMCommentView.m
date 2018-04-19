@@ -7,7 +7,6 @@
 //
 
 #import "WMCommentView.h"
-#import "WMCommentTableView.h"
 #import "WMCommon.h"
 #import "WMMomentModel.h"
 #import "WMMomentLayout.h"
@@ -69,7 +68,7 @@
     CGContextSetLineJoin(context,kCGLineJoinRound);
     CGContextSetLineWidth(context, strokeWidth);
     CGContextSetStrokeColorWithColor(context, [UIColor clearColor].CGColor);
-    CGContextSetFillColorWithColor(context, HEX_RGB(COLOR_BACKGROUND).CGColor);// 设置填充颜色
+    CGContextSetFillColorWithColor(context, HEX_RGB(COLOR_BACKGROUND).CGColor);
     
     CGContextBeginPath(context);
     CGContextMoveToPoint(context, borderRadius+offset,kPopupTriangleHeigh + offset);
@@ -97,13 +96,14 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell;//这里不使用重用机制(会出现评论窜位bug)
+    NSString *identifier = @"commentCell";
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    YYTextLayout * layout = self.commentArray[indexPath.row];
+    YYTextLayout * layout = [self.commentArray objectAtIndexSafe:indexPath.row];
     
     YYLabel * label;
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"commentCell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
         cell.backgroundColor = [UIColor clearColor];
         label = [YYLabel new];
         [cell addSubview:label];

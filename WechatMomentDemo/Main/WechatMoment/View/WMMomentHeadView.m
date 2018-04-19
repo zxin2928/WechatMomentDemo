@@ -83,10 +83,19 @@
 
 -(void)setModel:(WMPersonModel *)model{
     _model = model;
-    [_backgroundImageView sd_setImageWithURL:[NSURL URLWithString:_model.profileImage] placeholderImage:[UIImage imageNamed:@"AlbumReflashIcon"]];
+    [_iconImageView downloadImageWithURL:model.avatar];
+    [_backgroundImageView downloadImageWithURL:model.profileImage];
 
-    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"AlbumReflashIcon"]];
+}
 
+-(void)downloadImageWithUrl:(NSURL*)url imageView:(UIImageView*)imageView{
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [UIImage imageWithData:data];
+    if (image) {
+        [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+            imageView.image = image;
+        }];
+    }
 }
 
 @end

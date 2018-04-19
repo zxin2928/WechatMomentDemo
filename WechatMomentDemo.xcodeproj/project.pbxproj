@@ -30,7 +30,6 @@
 		DCB676782084F51400000120 /* WMRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676772084F51400000120 /* WMRequestManager.m */; };
 		DCB6767B2084FA9200000120 /* WMMomentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6767A2084FA9200000120 /* WMMomentModel.m */; };
 		DCB6768B2085CB8500000120 /* WMModelClass.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6768A2085CB8500000120 /* WMModelClass.m */; };
-		DCB676952085FBB000000120 /* WMCommentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676942085FBB000000120 /* WMCommentTableView.m */; };
 		DCB67698208629CE00000120 /* WMBaseRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB67697208629CE00000120 /* WMBaseRefreshView.m */; };
 		DCB6769B20862A6B00000120 /* WMMomentRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6769A20862A6B00000120 /* WMMomentRefreshView.m */; };
 		DCB6769E20862B4000000120 /* WMMomentHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6769D20862B4000000120 /* WMMomentHeadView.m */; };
@@ -41,6 +40,7 @@
 		DCB676BD2088126900000120 /* WMPersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676BC2088126900000120 /* WMPersonModel.m */; };
 		DCB676FF208879C900000120 /* WMMomentLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB676FE208879C900000120 /* WMMomentLayout.m */; };
 		DCB677022088910E00000120 /* WMCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB677012088910E00000120 /* WMCommentView.m */; };
+		DCB677052088C27600000120 /* UIImageView+Download.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB677042088C27600000120 /* UIImageView+Download.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,8 +112,6 @@
 		DCB6767A2084FA9200000120 /* WMMomentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMMomentModel.m; sourceTree = "<group>"; };
 		DCB676892085CB8500000120 /* WMModelClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMModelClass.h; sourceTree = "<group>"; };
 		DCB6768A2085CB8500000120 /* WMModelClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMModelClass.m; sourceTree = "<group>"; };
-		DCB676932085FBB000000120 /* WMCommentTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMCommentTableView.h; sourceTree = "<group>"; };
-		DCB676942085FBB000000120 /* WMCommentTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMCommentTableView.m; sourceTree = "<group>"; };
 		DCB67696208629CE00000120 /* WMBaseRefreshView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMBaseRefreshView.h; sourceTree = "<group>"; };
 		DCB67697208629CE00000120 /* WMBaseRefreshView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMBaseRefreshView.m; sourceTree = "<group>"; };
 		DCB6769920862A6B00000120 /* WMMomentRefreshView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMMomentRefreshView.h; sourceTree = "<group>"; };
@@ -134,6 +132,8 @@
 		DCB676FE208879C900000120 /* WMMomentLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMMomentLayout.m; sourceTree = "<group>"; };
 		DCB677002088910E00000120 /* WMCommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMCommentView.h; sourceTree = "<group>"; };
 		DCB677012088910E00000120 /* WMCommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMCommentView.m; sourceTree = "<group>"; };
+		DCB677032088C27600000120 /* UIImageView+Download.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Download.h"; sourceTree = "<group>"; };
+		DCB677042088C27600000120 /* UIImageView+Download.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Download.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -429,6 +429,8 @@
 		DCB67686208582BA00000120 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				DCB677032088C27600000120 /* UIImageView+Download.h */,
+				DCB677042088C27600000120 /* UIImageView+Download.m */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -465,8 +467,6 @@
 		DCB676A220863A1300000120 /* CommentView */ = {
 			isa = PBXGroup;
 			children = (
-				DCB676932085FBB000000120 /* WMCommentTableView.h */,
-				DCB676942085FBB000000120 /* WMCommentTableView.m */,
 				DCB677002088910E00000120 /* WMCommentView.h */,
 				DCB677012088910E00000120 /* WMCommentView.m */,
 			);
@@ -668,8 +668,8 @@
 				DCB6765A2084D5A000000120 /* UIScrollView+Gesture.m in Sources */,
 				DCB676572084D5A000000120 /* NSMutableDictionary+Safe.m in Sources */,
 				DCB67698208629CE00000120 /* WMBaseRefreshView.m in Sources */,
+				DCB677052088C27600000120 /* UIImageView+Download.m in Sources */,
 				DCB676592084D5A000000120 /* NSString+Category.m in Sources */,
-				DCB676952085FBB000000120 /* WMCommentTableView.m in Sources */,
 				DCB676582084D5A000000120 /* NSMutableArray+Safe.m in Sources */,
 				DCB676452084B31600000120 /* WMMomentViewController.m in Sources */,
 				DCB677022088910E00000120 /* WMCommentView.m in Sources */,

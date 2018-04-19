@@ -45,7 +45,7 @@
     }
     
     _height += kDynamicsPortraitNamePadding;
-    _height += kDynamicsNameHeight;//时间
+    _height += kDynamicsNameHeight;
     _height += kDynamicsPortraitNamePadding;
     
     if (_model.comments.count != 0) {
@@ -71,27 +71,27 @@
                                  range:text.rangeOfAll
                             usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                                 
-                                if (result.URL) {
-                                    YYTextHighlight * highLight = [YYTextHighlight new];
-                                    [text setColor:[UIColor colorWithRed:69/255.0 green:88/255.0 blue:133/255.0 alpha:1] range:result.range];
-                                    highLight.tapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-                                        if (weakSelf.clickUrlBlock) {
-                                            weakSelf.clickUrlBlock([text.string substringWithRange:range]);
-                                        }
-                                    };
-                                    [text setTextHighlight:highLight range:result.range];
-                                }
-                                if (result.phoneNumber) {
-                                    YYTextHighlight * highLight = [YYTextHighlight new];
-                                    [text setColor:[UIColor colorWithRed:69/255.0 green:88/255.0 blue:133/255.0 alpha:1] range:result.range];
-                                    highLight.tapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-                                        if (weakSelf.clickPhoneNumBlock) {
-                                            weakSelf.clickPhoneNumBlock([text.string substringWithRange:range]);
-                                        }
-                                    };
-                                    [text setTextHighlight:highLight range:result.range];
-                                }
-                            }];
+            if (result.URL) {
+                YYTextHighlight * highLight = [YYTextHighlight new];
+                [text setColor:[UIColor colorWithRed:69/255.0 green:88/255.0 blue:133/255.0 alpha:1] range:result.range];
+                highLight.tapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+                    if (weakSelf.clickUrlBlock) {
+                        weakSelf.clickUrlBlock([text.string substringWithRange:range]);
+                    }
+                };
+                [text setTextHighlight:highLight range:result.range];
+            }
+            if (result.phoneNumber) {
+                YYTextHighlight * highLight = [YYTextHighlight new];
+                [text setColor:[UIColor colorWithRed:69/255.0 green:88/255.0 blue:133/255.0 alpha:1] range:result.range];
+                highLight.tapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+                    if (weakSelf.clickPhoneNumBlock) {
+                        weakSelf.clickPhoneNumBlock([text.string substringWithRange:range]);
+                    }
+                };
+                [text setTextHighlight:highLight range:result.range];
+            }
+    }];
     
     NSInteger lineCount = 6;
     YYTextContainer * container = [YYTextContainer containerWithSize:CGSizeMake(kScreenWidth - kDynamicsNormalPadding - kDynamicsPortraitWidthAndHeight - kDynamicsPortraitNamePadding - kDynamicsNormalPadding, _model.isOpening ? CGFLOAT_MAX : 16 * lineCount + kDynamicsLineSpacing * (lineCount - 1))];

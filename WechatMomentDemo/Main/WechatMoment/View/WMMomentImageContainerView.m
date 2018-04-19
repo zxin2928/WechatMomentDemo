@@ -79,8 +79,8 @@
         imageView.hidden = NO;
         
         WMImageModel *imageModel = [_picPathStringsArray objectAtIndexSafe:idx];
-        NSURL * url = [NSURL URLWithString:imageModel.url];
-        [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeHolderImg"] options:SDWebImageRetryFailed];
+        [imageView downloadImageWithURL:imageModel.url];
+                
         imageView.frame = CGRectMake(columnIndex * (itemW + margin), rowIndex * (itemH + margin), itemW, itemH);
     }];
     

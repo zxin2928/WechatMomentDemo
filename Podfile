@@ -10,6 +10,5 @@ target 'WechatMomentDemo' do
     pod 'YYKeyboardManager'
     pod 'MJRefresh'
     pod 'MLEmojiLabel'
-    pod 'SDWebImage'
 
 end
